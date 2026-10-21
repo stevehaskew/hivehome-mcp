@@ -17,6 +17,7 @@ from typing import Any, Literal
 
 from .models import (
     Boost,
+    DaySchedule,
     DeviceSummary,
     HeatingMode,
     HeatingStatus,
@@ -24,6 +25,8 @@ from .models import (
     HotWaterStatus,
     ScheduleNowNextLater,
     ScheduleSlot,
+    WeeklySchedule,
+    WeeklySlot,
     ZoneKind,
 )
 from .snapshot import LONDON, HiveSnapshot
@@ -51,15 +54,16 @@ def _product_type(product: dict[str, Any]) -> DeviceType | None:
     return None
 
 
-def find_device(snap: HiveSnapshot, key: str | None, wanted: DeviceType) -> str:
+def find_device(snap: HiveSnapshot, key: str | None, wanted: DeviceType | None) -> str:
     """Resolve an id or (case-insensitive) name to a product id.
 
-    With no key, succeeds only when there is exactly one device of that type.
+    `wanted=None` accepts heating zones and hot water alike. With no key, succeeds
+    only when there is exactly one device of that type.
     """
     candidates = {
         pid: device_name(snap, pid)
         for pid, product in snap.products.items()
-        if _product_type(product) == wanted
+        if (kind := _product_type(product)) is not None and wanted in (None, kind)
     }
     if key is None:
         if len(candidates) == 1:
@@ -73,7 +77,9 @@ def find_device(snap: HiveSnapshot, key: str | None, wanted: DeviceType) -> str:
     raise UnknownDevice(f"No {_noun(wanted)} called {key!r}. Choose from: {_choices(candidates)}.")
 
 
-def _noun(wanted: DeviceType) -> str:
+def _noun(wanted: DeviceType | None) -> str:
+    if wanted is None:
+        return "heating zone or hot water system"
     return "heating zone" if wanted == "heating" else "hot water system"
 
 
@@ -294,19 +300,35 @@ def hot_water_status(
 # --- schedule --------------------------------------------------------------------
 
 
-def now_next_later(schedule: Any, now: datetime) -> ScheduleNowNextLater | None:
-    """The slot in force at `now` and the two after it, wrapping round the week."""
+Entry = tuple[int, dict[str, Any]]  # (minutes after Monday 00:00, raw value)
+
+
+def _week_entries(schedule: Any) -> list[Entry]:
+    """Valid slot starts across the week, in order, with repeated values merged."""
     if not isinstance(schedule, dict):
-        return None
-    entries: list[tuple[int, dict[str, Any]]] = []
+        return []
+    entries: list[Entry] = []
     for day_index, day in enumerate(DAYS):
         for raw in schedule.get(day) or []:
             start = raw.get("start")
             if isinstance(start, int) and 0 <= start < 24 * 60:
                 entries.append((day_index * 24 * 60 + start, raw.get("value") or {}))
+    return _merge_repeats(sorted(entries, key=lambda e: e[0])) if entries else []
+
+
+def _slot_values(value: dict[str, Any]) -> dict[str, Any]:
+    status = value.get("status")
+    return {
+        "target_c": _number(value.get("target")),
+        "hot_water_on": status == "ON" if status in ("ON", "OFF") else None,
+    }
+
+
+def now_next_later(schedule: Any, now: datetime) -> ScheduleNowNextLater | None:
+    """The slot in force at `now` and the two after it, wrapping round the week."""
+    entries = _week_entries(schedule)
     if not entries:
         return None
-    entries = _merge_repeats(sorted(entries, key=lambda e: e[0]))
 
     local = now.astimezone(LONDON)
     monday = local.date() - timedelta(days=local.weekday())
@@ -319,18 +341,57 @@ def now_next_later(schedule: Any, now: datetime) -> ScheduleNowNextLater | None:
 
     def slot(position: int) -> ScheduleSlot:
         value = entries[position % len(entries)][1]
-        status = value.get("status")
-        return ScheduleSlot(
-            starts=at(position),
-            ends=at(position + 1),
-            target_c=_number(value.get("target")),
-            hot_water_on=status == "ON" if status in ("ON", "OFF") else None,
-        )
+        return ScheduleSlot(starts=at(position), ends=at(position + 1), **_slot_values(value))
 
     return ScheduleNowNextLater(now=slot(current), next=slot(current + 1), later=slot(current + 2))
 
 
-def _merge_repeats(entries: list[tuple[int, dict[str, Any]]]) -> list[tuple[int, dict[str, Any]]]:
+def week_days(schedule: Any) -> list[DaySchedule]:
+    """Each day midnight to midnight; a day opens with the setting carried over from
+    the day before, and back-to-back repeats are merged."""
+    entries = _week_entries(schedule)
+    if not entries:
+        return []
+    out = []
+    for day_index, day in enumerate(DAYS):
+        day_start, day_end = day_index * 24 * 60, (day_index + 1) * 24 * 60
+        carried = [v for m, v in entries if m <= day_start] or [entries[-1][1]]
+        changes = [(day_start, carried[-1])] + [e for e in entries if day_start < e[0] < day_end]
+        ends = [m for m, _ in changes[1:]] + [day_end]
+        slots = [
+            WeeklySlot(start_minute=m - day_start, end_minute=end - day_start, **_slot_values(v))
+            for (m, v), end in zip(changes, ends, strict=True)
+        ]
+        out.append(DaySchedule(day=day, slots=slots))  # type: ignore[arg-type]
+    return out
+
+
+def weekly_schedule(snap: HiveSnapshot, product_id: str) -> WeeklySchedule:
+    product = snap.products[product_id]
+    available, problem = availability(snap, product_id)
+    kind = _product_type(product) or "heating"
+    common: dict[str, Any] = {
+        "id": product_id,
+        "name": device_name(snap, product_id),
+        "type": kind,
+        "available": available,
+        "problem": problem,
+        "as_of": snap.fetched_at,
+    }
+    if not available:
+        return WeeklySchedule(**common)
+    state, props = product.get("state", {}), product.get("props", {})
+    raw_mode, boost = _modes(state, props)
+    modes: dict[str, Any] = _HEATING_MODES if kind == "heating" else _HOT_WATER_MODES
+    return WeeklySchedule(
+        **common,
+        mode=modes.get(raw_mode or ""),
+        boost_active=boost.active,
+        days=week_days(state.get("schedule")),
+    )
+
+
+def _merge_repeats(entries: list[Entry]) -> list[Entry]:
     """Drop slots that only repeat the value before them, round the week, so each slot
     is a change. Hive often splits one setting over several slots (10°C, 10°C, 10°C)."""
     merged = [e for i, e in enumerate(entries) if e[1] != entries[i - 1][1]]

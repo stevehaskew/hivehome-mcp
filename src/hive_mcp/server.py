@@ -24,10 +24,12 @@ from .views import (
     DeviceList,
     HeatingReport,
     HotWaterView,
+    WeeklyScheduleView,
     device_view,
     freshness,
     heating_view,
     hot_water_view,
+    weekly_schedule_view,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -130,6 +132,23 @@ def create_server(
         def build(snap: HiveSnapshot) -> HotWaterView:
             pid = readings.find_device(snap, system, "hot_water")
             return hot_water_view(readings.hot_water_status(snap, pid), snap)
+
+        return await with_snapshot(ctx, build)
+
+    @mcp.tool(annotations=READ_ONLY)
+    async def get_schedule(ctx: Context, zone: str) -> WeeklyScheduleView:
+        """The full weekly schedule (Monday to Sunday) for a heating zone or the hot water.
+
+        Each day runs midnight to midnight, as a list of times and target temperatures
+        (or hot water on/off). Use get_heating_status for just now, next and later.
+
+        Args:
+            zone: Heating zone name (case-insensitive) or id, or "Hot water".
+        """
+
+        def build(snap: HiveSnapshot) -> WeeklyScheduleView:
+            pid = readings.find_device(snap, zone, None)
+            return weekly_schedule_view(readings.weekly_schedule(snap, pid), snap)
 
         return await with_snapshot(ctx, build)
 

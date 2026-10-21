@@ -71,3 +71,27 @@ class HotWaterStatus(BaseModel):
     boost: Boost = Field(default_factory=lambda: Boost(active=False))
     schedule: ScheduleNowNextLater | None = None
     as_of: datetime
+
+
+class WeeklySlot(BaseModel):
+    start_minute: int = Field(description="Minutes past midnight, UK local time")
+    end_minute: int = Field(description="Minutes past midnight; 1440 is the end of the day")
+    target_c: float | None = None
+    hot_water_on: bool | None = None
+
+
+class DaySchedule(BaseModel):
+    day: Literal["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    slots: list[WeeklySlot] = Field(description="Covers the whole day, midnight to midnight")
+
+
+class WeeklySchedule(BaseModel):
+    id: str
+    name: str
+    type: Literal["heating", "hot_water"]
+    available: bool
+    problem: str | None = None
+    mode: HeatingMode | HotWaterMode | None = Field(None, description="Underlying mode")
+    boost_active: bool = False
+    days: list[DaySchedule] = Field(default_factory=list, description="Empty if Hive has none")
+    as_of: datetime

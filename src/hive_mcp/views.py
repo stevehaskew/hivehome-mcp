@@ -17,6 +17,8 @@ from .models import (
     HotWaterStatus,
     ScheduleNowNextLater,
     ScheduleSlot,
+    WeeklySchedule,
+    WeeklySlot,
     ZoneKind,
 )
 from .snapshot import LONDON, HiveSnapshot
@@ -240,3 +242,90 @@ def hot_water_summary(st: HotWaterStatus) -> str:
         nxt = st.schedule.next
         sentence += f" Next: {_slot_value(nxt)} from {uk_when(nxt.starts, st.as_of)}."
     return sentence
+
+
+# --- weekly schedule ---------------------------------------------------------------
+
+
+class WeeklySlotView(BaseModel):
+    start: str = Field(description="HH:MM, UK time")
+    end: str = Field(description="HH:MM; 24:00 is the end of the day")
+    target_c: float | None = None
+    hot_water_on: bool | None = None
+
+
+class DayView(BaseModel):
+    day: str = Field(description="Monday to Sunday")
+    slots: list[WeeklySlotView]
+    summary: str
+
+
+class WeeklyScheduleView(Freshness):
+    id: str
+    name: str
+    type: Literal["heating", "hot_water"]
+    available: bool
+    problem: str | None = None
+    mode: str | None = None
+    in_force: bool = Field(description="True if the zone is following this schedule now")
+    days: list[DayView] = Field(default_factory=list)
+    summary: str
+
+
+def _clock(minute: int) -> str:
+    return f"{minute // 60:02d}:{minute % 60:02d}"
+
+
+def _weekly_value(slot: WeeklySlot) -> str:
+    if slot.target_c is not None:
+        return celsius(slot.target_c)
+    return "on" if slot.hot_water_on else "off"
+
+
+def _day_summary(slots: list[WeeklySlot]) -> str:
+    if len(slots) == 1:
+        return f"{_weekly_value(slots[0])} all day"
+    return ", ".join(
+        f"{_clock(s.start_minute)}–{_clock(s.end_minute)} {_weekly_value(s)}" for s in slots
+    )
+
+
+def weekly_schedule_view(ws: WeeklySchedule, snap: HiveSnapshot) -> WeeklyScheduleView:
+    in_force = ws.available and ws.mode == "SCHEDULE" and not ws.boost_active
+    days = [
+        DayView(
+            day=d.day.capitalize(),
+            slots=[
+                WeeklySlotView(
+                    start=_clock(s.start_minute),
+                    end=_clock(s.end_minute),
+                    target_c=s.target_c,
+                    hot_water_on=s.hot_water_on,
+                )
+                for s in d.slots
+            ],
+            summary=_day_summary(d.slots),
+        )
+        for d in ws.days
+    ]
+    return WeeklyScheduleView(
+        **freshness(snap).model_dump(),
+        **ws.model_dump(exclude={"days", "as_of", "boost_active"}),
+        in_force=in_force,
+        days=days,
+        summary=weekly_summary(ws, in_force),
+    )
+
+
+def weekly_summary(ws: WeeklySchedule, in_force: bool) -> str:
+    if not ws.available:
+        return f"{ws.name} is unavailable: {ws.problem or 'no reason given'}."
+    if not ws.days:
+        return f"Hive has no weekly schedule for {ws.name}."
+    if in_force:
+        return f"Weekly schedule for {ws.name}, which it is following now."
+    if ws.boost_active:
+        return f"Weekly schedule for {ws.name}. It's boosting now; the schedule resumes after."
+    now = {"OFF": "switched off", "MANUAL": "on a fixed target", "ON": "set to always on"}
+    state = now.get(ws.mode or "", "in an unknown mode")
+    return f"Weekly schedule for {ws.name}. It isn't in use: {ws.name} is {state}."

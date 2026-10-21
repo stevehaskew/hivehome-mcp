@@ -80,7 +80,12 @@ async def call(c: Client[Any], tool: str, **args: Any) -> dict[str, Any]:
 
 async def test_only_read_only_tools_are_exposed(client: Client[Any]) -> None:
     tools = {t.name: t for t in await client.list_tools()}
-    assert set(tools) == {"list_devices", "get_heating_status", "get_hot_water_status"}
+    assert set(tools) == {
+        "list_devices",
+        "get_heating_status",
+        "get_hot_water_status",
+        "get_schedule",
+    }
     for tool in tools.values():
         assert tool.annotations is not None and tool.annotations.read_only_hint is True
         assert tool.description
@@ -181,6 +186,40 @@ async def test_hot_water(client: Client[Any]) -> None:
 async def test_stale_flag_is_passed_through(client: Client[Any]) -> None:
     FixedClient.stale = True
     assert (await call(client, "list_devices"))["stale"] is True
+
+
+# --- get_schedule ------------------------------------------------------------------
+
+
+async def test_schedule_for_zone_switched_off(client: Client[Any]) -> None:
+    data = await call(client, "get_schedule", zone="thermostat 3")
+    assert (data["name"], data["mode"], data["in_force"]) == ("Thermostat 3", "OFF", False)
+    assert data["summary"] == (
+        "Weekly schedule for Thermostat 3. It isn't in use: Thermostat 3 is switched off."
+    )
+    assert [d["day"] for d in data["days"]][:2] == ["Monday", "Tuesday"]
+    tuesday = data["days"][1]
+    assert tuesday["summary"] == "00:00–10:00 7°C, 10:00–14:45 19°C, 14:45–24:00 7°C"
+    assert tuesday["slots"][-1] == {
+        "start": "14:45",
+        "end": "24:00",
+        "target_c": 7.0,
+        "hot_water_on": None,
+    }
+
+
+async def test_schedule_for_hot_water(client: Client[Any]) -> None:
+    data = await call(client, "get_schedule", zone="Hot water")
+    assert (data["type"], data["in_force"]) == ("hot_water", True)
+    assert data["days"][0]["summary"].startswith("00:00–01:00 off, 01:00–12:30 on")
+
+
+async def test_schedule_all_day_and_unknown_zone(client: Client[Any]) -> None:
+    data = await call(client, "get_schedule", zone="Main Hall")
+    assert data["days"][0]["summary"] == "10°C all day"
+    result = await client.call_tool("get_schedule", {"zone": "Kitchen"}, raise_on_error=False)
+    assert result.is_error
+    assert "Hot water" in result.content[0].text  # type: ignore[union-attr]
 
 
 # --- failures ----------------------------------------------------------------------

@@ -9,10 +9,10 @@ A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later con
 | Area | State |
 |---|---|
 | Login / 2FA / device trust | ✅ `hive-mcp login`, `logout`, `status [--simulate-expiry]`. Credentials in the macOS Keychain. Unattended re-login verified live. |
-| Read-only MCP tools | ✅ `list_devices`, `get_heating_status`, `get_hot_water_status`, verified live against the real account. |
+| Read-only MCP tools | ✅ `list_devices`, `get_heating_status`, `get_hot_water_status`, `get_schedule`, verified live against the real account. |
 | Claude Code registration | ✅ Project scope (`.mcp.json`, gitignored; `.mcp.json.example` is committed), approved via `.claude/settings.local.json`. Used from a fresh session 21/10/2026. |
-| Tests | ✅ 80 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
-| Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Needs a Desktop restart; not yet checked in the app. |
+| Tests | ✅ 89 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
+| Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Checked in the app after a restart. |
 | Full weekly schedule tool | ⏳ Not done (the raw data is already in each snapshot). |
 | Write tools | ⏳ Not started. Must stay behind `HIVE_MCP_ALLOW_WRITES` (§6). |
 | Version control | ✅ git, `main`, remote `github.com/stevehaskew/hivehome-mcp` (public). |
@@ -89,13 +89,13 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
 
 1. ✅ **Use it from a fresh Claude Code session** (21/10/2026). The tools load and the answers are correct. Wording to fix (see step 4).
 2. ✅ **Version control.** First commit pushed to `github.com/stevehaskew/hivehome-mcp` (public), so keep checking for personal data before every push.
-3. ✅ **Claude Desktop registration.** Added the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Still to do: restart Claude Desktop and check the tools appear.
+3. ✅ **Claude Desktop registration.** Added the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Checked in the app after a restart.
 4. **Small polish:**
    - ✅ (21/10/2026) Expected `ToolError`s are logged below ERROR (unknown zone and sign-in at INFO, Hive unreachable at WARNING), so they stay off stderr.
    - ✅ (21/10/2026) `readings.now_next_later` merges back-to-back slots with the same value, round the week, so now/next/later are real changes. Main Hall's "now" slot can therefore start days ago.
    - ✅ (21/10/2026) Summaries use `views.uk_when`: "22:00", "tomorrow 02:00", "yesterday 21:30", "Fri 09:00" within the coming week, otherwise the full date. The structured `starts`/`ends`/`as_of` fields keep full DD/MM/YYYY dates.
    - ✅ (21/10/2026) `min_temp_c`/`max_temp_c` are gone (they were constants, not read from Hive; the write tools will have their own limits, §6). `controller` is only given when it isn't the zone's own thermostat, i.e. for hot water.
-   - Optionally add a `get_schedule(zone)` tool that returns the full weekly schedule. The raw schedule is already in the snapshot (`state.schedule`, minutes past midnight per day).
+   - ✅ (21/10/2026) `get_schedule(zone)` returns the full weekly schedule for a heating zone or the hot water (`readings.week_days`). Each day runs midnight to midnight, opening with the setting carried over from the day before, with repeats merged. It also says whether the schedule is in use (`in_force`); OFF zones still have a stored schedule.
 5. **Write tools (phase 2).** See §6.
 6. **Upstream:** report the two library bugs (§2) to `Pyhass/Pyhive` after checking 2.0.0b4. Ask the user before posting anything publicly.
 

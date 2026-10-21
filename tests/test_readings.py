@@ -244,3 +244,59 @@ def test_readings_do_not_mutate_snapshot(snap: HiveSnapshot) -> None:
         fn = r.heating_status if d.type == "heating" else r.hot_water_status
         fn(snap, d.id)
     assert snap.products == before
+
+
+# --- weekly schedule -----------------------------------------------------------------
+
+
+def day_slots(days: list[Any], day: str) -> list[tuple[int, int, Any]]:
+    [d] = [d for d in days if d.day == day]
+    return [
+        (s.start_minute, s.end_minute, s.target_c if s.target_c is not None else s.hot_water_on)
+        for s in d.slots
+    ]
+
+
+def test_week_days_carry_over_midnight_and_fill_each_day() -> None:
+    days = r.week_days(WEEK)
+    assert [d.day for d in days] == list(r.DAYS)
+    # Monday opens with Wednesday's 18°C, carried round the week.
+    assert day_slots(days, "monday") == [(0, 420, 18.0), (420, 1320, 20.0), (1320, 1440, 15.0)]
+    assert day_slots(days, "tuesday") == [(0, 1440, 15.0)]
+    assert day_slots(days, "wednesday") == [(0, 360, 15.0), (360, 1440, 18.0)]
+    assert day_slots(days, "sunday") == [(0, 1440, 18.0)]
+
+
+def test_week_days_merge_repeats_and_ignore_bad_entries() -> None:
+    week = {
+        "monday": [{"start": 0, "value": {"target": 16}}, {"start": 600, "value": {"target": 16}}],
+        "friday": [{"start": "x"}, {"start": 480, "value": {"target": 20}}],
+    }
+    days = r.week_days(week)
+    assert day_slots(days, "monday") == [(0, 1440, 16.0)]
+    assert day_slots(days, "friday") == [(0, 480, 16.0), (480, 1440, 20.0)]
+    assert r.week_days(None) == []
+
+
+def test_weekly_schedule_for_zone_switched_off(snap: HiveSnapshot) -> None:
+    ws = r.weekly_schedule(snap, "id-16")
+    assert (ws.name, ws.type, ws.mode, ws.boost_active) == ("Thermostat 3", "heating", "OFF", False)
+    assert day_slots(ws.days, "tuesday") == [(0, 600, 7.0), (600, 885, 19.0), (885, 1440, 7.0)]
+
+
+def test_weekly_schedule_for_hot_water(snap: HiveSnapshot) -> None:
+    ws = r.weekly_schedule(snap, "id-18")
+    assert (ws.type, ws.mode) == ("hot_water", "SCHEDULE")
+    assert day_slots(ws.days, "monday")[:2] == [(0, 60, False), (60, 750, True)]
+
+
+def test_weekly_schedule_for_unavailable_zone(snap: HiveSnapshot) -> None:
+    ws = r.weekly_schedule(snap, "id-7")
+    assert not ws.available and ws.days == []
+
+
+def test_find_device_of_either_type(snap: HiveSnapshot) -> None:
+    assert r.find_device(snap, "hot water", None) == "id-18"
+    assert r.find_device(snap, "main hall", None) == "id-11"
+    with pytest.raises(r.UnknownDevice, match="heating zone or hot water system.*Hot water"):
+        r.find_device(snap, "Kitchen", None)

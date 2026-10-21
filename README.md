@@ -33,7 +33,7 @@ uv run hive-mcp serve                  # stdio; normally started by Claude, not 
 HIVE_MCP_FAKE=1 uv run hive-mcp serve  # same, serving the fixture
 ```
 
-Read-only tools: `list_devices`, `get_heating_status` (one zone by name or id, or every zone if none is given) and `get_hot_water_status`.
+Read-only tools: `list_devices`, `get_heating_status` (one zone by name or id, or every zone if none is given), `get_hot_water_status` and `get_schedule` (the full Monday–Sunday schedule for one heating zone or the hot water).
 
 It's registered for Claude Code at project scope in `.mcp.json`, which is gitignored because it holds absolute paths. Copy [.mcp.json.example](.mcp.json.example) to `.mcp.json` and replace `/path/to/hivehome-mcp` with this folder's path. The paths are absolute (uv at `/opt/homebrew/bin/uv`), so it still works when the app isn't launched from a shell. Approve it the first time Claude Code asks. Or create the entry with:
 
