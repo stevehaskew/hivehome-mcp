@@ -12,7 +12,7 @@ A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later con
 | Read-only MCP tools | ✅ `list_devices`, `get_heating_status`, `get_hot_water_status`, verified live against the real account. |
 | Claude Code registration | ✅ Project scope (`.mcp.json`, gitignored; `.mcp.json.example` is committed), approved via `.claude/settings.local.json`. Used from a fresh session 21/10/2026. |
 | Tests | ✅ 71 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
-| Claude Desktop registration | ⏳ Not done. |
+| Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Needs a Desktop restart; not yet checked in the app. |
 | Full weekly schedule tool | ⏳ Not done (the raw data is already in each snapshot). |
 | Write tools | ⏳ Not started. Must stay behind `HIVE_MCP_ALLOW_WRITES` (§6). |
 | Version control | ✅ git, `main`, remote `github.com/stevehaskew/hivehome-mcp` (public). |
@@ -88,8 +88,8 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
 ## 5. Next steps (in suggested order)
 
 1. ✅ **Use it from a fresh Claude Code session** (21/10/2026). The tools load and the answers are correct. Wording to fix (see step 4).
-2. **Version control.** `git init`, check `.gitignore` covers `spike/out/` and `.claude/settings.local.json`, scan the files for personal data (see §3), then make the first commit. Ask before pushing anywhere.
-3. **Claude Desktop registration.** Add the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Confirm with the user before editing app config.
+2. ✅ **Version control.** First commit pushed to `github.com/stevehaskew/hivehome-mcp` (public), so keep checking for personal data before every push.
+3. ✅ **Claude Desktop registration.** Added the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Still to do: restart Claude Desktop and check the tools appear.
 4. **Small polish:**
    - FastMCP logs expected `ToolError`s (such as an unknown zone) at ERROR on stderr. Quieten that.
    - Schedule: merge back-to-back slots with the same target. Main Hall shows "now 10°C, next 10°C, later 10°C", and the summary's "Next: 10°C from 01:00" reads like a change when nothing changes. Hot water likewise for same on/off state.
