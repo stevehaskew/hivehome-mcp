@@ -56,8 +56,6 @@ class HeatingStatus(BaseModel):
     frost_protection_c: float | None = None
     heating_on: bool | None = Field(None, description="Calling for heat right now")
     boost: Boost = Field(default_factory=lambda: Boost(active=False))
-    min_temp_c: float = 5.0
-    max_temp_c: float = 32.0
     battery_pct: int | None = None
     schedule: ScheduleNowNextLater | None = Field(None, description="Only in SCHEDULE mode")
     as_of: datetime

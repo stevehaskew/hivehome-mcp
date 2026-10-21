@@ -11,7 +11,7 @@ A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later con
 | Login / 2FA / device trust | ✅ `hive-mcp login`, `logout`, `status [--simulate-expiry]`. Credentials in the macOS Keychain. Unattended re-login verified live. |
 | Read-only MCP tools | ✅ `list_devices`, `get_heating_status`, `get_hot_water_status`, verified live against the real account. |
 | Claude Code registration | ✅ Project scope (`.mcp.json`, gitignored; `.mcp.json.example` is committed), approved via `.claude/settings.local.json`. Used from a fresh session 21/10/2026. |
-| Tests | ✅ 71 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
+| Tests | ✅ 80 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
 | Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Needs a Desktop restart; not yet checked in the app. |
 | Full weekly schedule tool | ⏳ Not done (the raw data is already in each snapshot). |
 | Write tools | ⏳ Not started. Must stay behind `HIVE_MCP_ALLOW_WRITES` (§6). |
@@ -91,10 +91,10 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
 2. ✅ **Version control.** First commit pushed to `github.com/stevehaskew/hivehome-mcp` (public), so keep checking for personal data before every push.
 3. ✅ **Claude Desktop registration.** Added the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Still to do: restart Claude Desktop and check the tools appear.
 4. **Small polish:**
-   - FastMCP logs expected `ToolError`s (such as an unknown zone) at ERROR on stderr. Quieten that.
-   - Schedule: merge back-to-back slots with the same target. Main Hall shows "now 10°C, next 10°C, later 10°C", and the summary's "Next: 10°C from 01:00" reads like a change when nothing changes. Hot water likewise for same on/off state.
-   - Summaries repeat the full date twice ("from Wed 21/10/2026 22:00 until Thu 22/10/2026 02:00"). Use times alone for today and "tomorrow 02:00" or "Thu 02:00" within a week; keep full dates for later.
-   - The per-zone `min_temp_c`/`max_temp_c` (5/32) and the boiler zones' `controller` (always the zone's own name) are noise in every response. Drop them, or keep `controller` only when it differs (it's useful for hot water).
+   - ✅ (21/10/2026) Expected `ToolError`s are logged below ERROR (unknown zone and sign-in at INFO, Hive unreachable at WARNING), so they stay off stderr.
+   - ✅ (21/10/2026) `readings.now_next_later` merges back-to-back slots with the same value, round the week, so now/next/later are real changes. Main Hall's "now" slot can therefore start days ago.
+   - ✅ (21/10/2026) Summaries use `views.uk_when`: "22:00", "tomorrow 02:00", "yesterday 21:30", "Fri 09:00" within the coming week, otherwise the full date. The structured `starts`/`ends`/`as_of` fields keep full DD/MM/YYYY dates.
+   - ✅ (21/10/2026) `min_temp_c`/`max_temp_c` are gone (they were constants, not read from Hive; the write tools will have their own limits, §6). `controller` is only given when it isn't the zone's own thermostat, i.e. for hot water.
    - Optionally add a `get_schedule(zone)` tool that returns the full weekly schedule. The raw schedule is already in the snapshot (`state.schedule`, minutes past midnight per day).
 5. **Write tools (phase 2).** See §6.
 6. **Upstream:** report the two library bugs (§2) to `Pyhass/Pyhive` after checking 2.0.0b4. Ask the user before posting anything publicly.

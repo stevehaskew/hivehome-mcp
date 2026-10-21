@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import dataclasses
+import logging
 from collections.abc import AsyncIterator
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -106,6 +107,8 @@ async def test_list_devices(client: Client[Any]) -> None:
     assert "MALFORMED_NODE_DESCRIPTOR" in downstairs["problem"]
     creche = next(d for d in data["devices"] if d["name"] == "Creche")
     assert (creche["battery_pct"], creche["low_battery"]) == (20, True)
+    controllers = {d["name"]: d["controller"] for d in data["devices"] if d["controller"]}
+    assert controllers == {"Hot water": "Thermostat 3"}  # zones' own thermostats are left out
 
 
 # --- get_heating_status ------------------------------------------------------------
@@ -123,12 +126,14 @@ async def test_one_zone_by_name(client: Client[Any]) -> None:
     assert (zone["current_temp_c"], zone["target_temp_c"], zone["mode"]) == (16.2, 12.0, "SCHEDULE")
     assert zone["heating_now"] is False
     assert [s["period"] for s in zone["schedule"]] == ["now", "next", "later"]
-    assert zone["schedule"][0]["starts"] == "Wed 21/10/2026 22:00"
+    assert zone["schedule"][0]["starts"] == "Wed 21/10/2026 13:00"
     assert zone["schedule"][0]["ends"] == "Thu 22/10/2026 02:00"
     assert zone["summary"] == (
         "Creche is 16.2°C, target 12°C, following its schedule, not calling for heat. "
-        "Next: 10°C from Thu 22/10/2026 02:00. Battery low (20%)."
+        "Next: 10°C from tomorrow 02:00. Battery low (20%)."
     )
+    assert zone["schedule"][2]["summary"] == "12°C from tomorrow 12:00 until Fri 02:00"
+    assert "min_temp_c" not in zone
 
 
 async def test_zone_off_summary(client: Client[Any]) -> None:
@@ -146,11 +151,19 @@ async def test_unavailable_zone(client: Client[Any]) -> None:
     assert zone["summary"].startswith("Downstairs is unavailable: boiler module and thermostat")
 
 
-async def test_unknown_zone_lists_choices(client: Client[Any]) -> None:
-    result = await client.call_tool("get_heating_status", {"zone": "Kitchen"}, raise_on_error=False)
+async def test_unknown_zone_lists_choices(
+    client: Client[Any], caplog: pytest.LogCaptureFixture
+) -> None:
+    with caplog.at_level(logging.DEBUG, logger="fastmcp"):
+        result = await client.call_tool(
+            "get_heating_status", {"zone": "Kitchen"}, raise_on_error=False
+        )
     assert result.is_error
     text = result.content[0].text  # type: ignore[union-attr]
     assert "No heating zone called 'Kitchen'" in text and "Main Hall" in text
+    # An expected mistake, not a server fault: kept off stderr (which shows ERROR).
+    [record] = [r for r in caplog.records if r.getMessage().startswith("Error calling tool")]
+    assert record.levelno == logging.INFO
 
 
 # --- get_hot_water_status ------------------------------------------------------------
@@ -160,7 +173,7 @@ async def test_hot_water(client: Client[Any]) -> None:
     data = await call(client, "get_hot_water_status")
     assert (data["name"], data["mode"], data["is_on"]) == ("Hot water", "SCHEDULE", False)
     assert data["summary"] == (
-        "Hot water is off, following its schedule. Next: hot water on from Thu 22/10/2026 01:00."
+        "Hot water is off, following its schedule. Next: hot water on from tomorrow 01:00."
     )
     assert data["as_of"] == "Wed 21/10/2026 22:15"
 

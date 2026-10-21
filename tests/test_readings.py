@@ -101,11 +101,10 @@ def test_trv_zone_on_schedule(snap: HiveSnapshot) -> None:
     assert (st.current_temp_c, st.target_temp_c, st.mode) == (16.2, 12.0, "SCHEDULE")
     assert st.heating_on is False
     assert not st.boost.active
-    assert (st.min_temp_c, st.max_temp_c) == (5.0, 32.0)
     assert slots(st) == [
-        (at(21, 22), at(22, 2), 12.0),
+        (at(21, 13), at(22, 2), 12.0),  # 13:00 and 22:00 slots were both 12°C
         (at(22, 2), at(22, 12), 10.0),
-        (at(22, 12), at(22, 22), 12.0),
+        (at(22, 12), at(23, 2), 12.0),
     ]
     assert st.as_of == NOW
 
@@ -114,9 +113,9 @@ def test_boiler_zone_on_schedule(snap: HiveSnapshot) -> None:
     st = r.heating_status(snap, "id-11")
     assert (st.current_temp_c, st.target_temp_c) == (18.5, 10.0)
     assert slots(st) == [
-        (at(21, 21, 30), at(22, 1), 10.0),
-        (at(22, 1), at(22, 5), 10.0),
-        (at(22, 5), at(22, 9), 10.0),
+        (at(18, 10, 15), at(23, 9), 10.0),  # Hive's many 10°C slots, merged
+        (at(23, 9), at(23, 12), 10.5),
+        (at(23, 12), at(25, 3), 10.0),
     ]
 
 
@@ -153,7 +152,7 @@ def test_hot_water_on_schedule(snap: HiveSnapshot) -> None:
     assert slots(st) == [
         (at(21, 22), at(22, 1), False),
         (at(22, 1), at(22, 12), True),
-        (at(22, 12), at(22, 16), False),
+        (at(22, 12), at(23, 1), False),
     ]
 
 
@@ -214,6 +213,29 @@ def test_single_slot_schedule() -> None:
     assert nnl is not None
     assert (nnl.now.starts, nnl.now.ends) == (at(16, 0), at(23, 0))
     assert (nnl.later.starts, nnl.later.target_c) == (at(30, 0), 16.0)
+
+
+def test_repeated_values_are_merged_round_the_week() -> None:
+    week = {
+        "monday": [
+            {"start": 360, "value": {"target": 18}},
+            {"start": 600, "value": {"target": 18}},
+        ],
+        "tuesday": [{"start": 360, "value": {"target": 12}}],
+        "sunday": [{"start": 1200, "value": {"target": 18.0}}],
+    }
+    nnl = r.now_next_later(week, at(19, 12))  # Monday
+    assert nnl is not None
+    # Sunday 20:00 runs on into Monday's 18°C slots, so the slot began last Sunday.
+    assert (nnl.now.starts, nnl.now.ends, nnl.now.target_c) == (at(18, 20), at(20, 6), 18.0)
+    assert (nnl.next.starts, nnl.next.ends, nnl.next.target_c) == (at(20, 6), at(25, 20), 12.0)
+
+
+def test_schedule_with_one_value_throughout() -> None:
+    week = {d: [{"start": 0, "value": {"status": "ON"}}] for d in ("monday", "thursday")}
+    nnl = r.now_next_later(week, NOW)
+    assert nnl is not None
+    assert (nnl.now.starts, nnl.now.ends, nnl.now.hot_water_on) == (at(19, 0), at(26, 0), True)
 
 
 def test_readings_do_not_mutate_snapshot(snap: HiveSnapshot) -> None:

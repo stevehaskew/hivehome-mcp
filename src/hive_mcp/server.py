@@ -75,15 +75,18 @@ def create_server(
             snap = await client.snapshot()
             return use(snap)
         except readings.UnknownDevice as err:
-            raise ToolError(str(err)) from err
+            raise ToolError(str(err), log_level=logging.INFO) from err
         except (CredentialsMissing, ReauthRequired) as err:
             _LOGGER.warning("Hive sign-in needed: %s", err)
             raise ToolError(
                 f"Hive needs signing in again ({err}). In a terminal, in the hive-mcp "
-                "project folder, run: uv run hive-mcp login"
+                "project folder, run: uv run hive-mcp login",
+                log_level=logging.INFO,  # already logged above
             ) from err
         except HiveUnavailable as err:
-            raise ToolError("Couldn't reach Hive. Try again in a minute.") from err
+            raise ToolError(
+                "Couldn't reach Hive. Try again in a minute.", log_level=logging.WARNING
+            ) from err
 
     @mcp.tool(annotations=READ_ONLY)
     async def list_devices(ctx: Context) -> DeviceList:

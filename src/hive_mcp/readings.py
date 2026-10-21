@@ -306,7 +306,7 @@ def now_next_later(schedule: Any, now: datetime) -> ScheduleNowNextLater | None:
                 entries.append((day_index * 24 * 60 + start, raw.get("value") or {}))
     if not entries:
         return None
-    entries.sort(key=lambda e: e[0])
+    entries = _merge_repeats(sorted(entries, key=lambda e: e[0]))
 
     local = now.astimezone(LONDON)
     monday = local.date() - timedelta(days=local.weekday())
@@ -328,6 +328,13 @@ def now_next_later(schedule: Any, now: datetime) -> ScheduleNowNextLater | None:
         )
 
     return ScheduleNowNextLater(now=slot(current), next=slot(current + 1), later=slot(current + 2))
+
+
+def _merge_repeats(entries: list[tuple[int, dict[str, Any]]]) -> list[tuple[int, dict[str, Any]]]:
+    """Drop slots that only repeat the value before them, round the week, so each slot
+    is a change. Hive often splits one setting over several slots (10°C, 10°C, 10°C)."""
+    merged = [e for i, e in enumerate(entries) if e[1] != entries[i - 1][1]]
+    return merged or entries[:1]
 
 
 def _wall_clock(monday: date, minutes: int) -> datetime:

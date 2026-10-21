@@ -35,6 +35,23 @@ def uk_datetime(dt: datetime) -> str:
     return dt.astimezone(LONDON).strftime("%a %d/%m/%Y %H:%M")
 
 
+def uk_when(dt: datetime, ref: datetime) -> str:
+    """`dt` for a sentence, relative to `ref`: '22:00', 'tomorrow 02:00', 'Fri 07:00'
+    within the coming week, otherwise the full 'Wed 28/10/2026 06:00'."""
+    local, today = dt.astimezone(LONDON), ref.astimezone(LONDON).date()
+    days = (local.date() - today).days
+    clock = local.strftime("%H:%M")
+    if days == 0:
+        return clock
+    if days == 1:
+        return f"tomorrow {clock}"
+    if days == -1:
+        return f"yesterday {clock}"
+    if 1 < days < 7:
+        return local.strftime("%a %H:%M")
+    return uk_datetime(dt)
+
+
 def celsius(value: float | None) -> str:
     return "unknown" if value is None else f"{value:g}°C"
 
@@ -60,7 +77,9 @@ class DeviceView(BaseModel):
     problem: str | None = None
     battery_pct: int | None = None
     low_battery: bool = False
-    controller: str | None = Field(None, description="Thermostat that controls it")
+    controller: str | None = Field(
+        None, description="Thermostat that controls it, if not the zone's own"
+    )
 
 
 class DeviceList(Freshness):
@@ -69,7 +88,10 @@ class DeviceList(Freshness):
 
 def device_view(d: DeviceSummary) -> DeviceView:
     low = d.battery_pct is not None and d.battery_pct <= LOW_BATTERY_PCT
-    return DeviceView(**d.model_dump(), low_battery=low)
+    controller = d.controller if d.controller != d.name else None
+    return DeviceView(
+        **d.model_dump(exclude={"controller"}), controller=controller, low_battery=low
+    )
 
 
 # --- schedule ------------------------------------------------------------------------
@@ -77,8 +99,8 @@ def device_view(d: DeviceSummary) -> DeviceView:
 
 class SlotView(BaseModel):
     period: Literal["now", "next", "later"]
-    starts: str
-    ends: str
+    starts: str = Field(description="UK time, DD/MM/YYYY")
+    ends: str = Field(description="UK time, DD/MM/YYYY")
     target_c: float | None = None
     hot_water_on: bool | None = None
     summary: str
@@ -90,7 +112,7 @@ def _slot_value(slot: ScheduleSlot) -> str:
     return "hot water on" if slot.hot_water_on else "hot water off"
 
 
-def schedule_view(s: ScheduleNowNextLater | None) -> list[SlotView]:
+def schedule_view(s: ScheduleNowNextLater | None, as_of: datetime) -> list[SlotView]:
     if s is None:
         return []
     out = []
@@ -102,8 +124,8 @@ def schedule_view(s: ScheduleNowNextLater | None) -> list[SlotView]:
                 ends=uk_datetime(slot.ends),
                 target_c=slot.target_c,
                 hot_water_on=slot.hot_water_on,
-                summary=f"{_slot_value(slot)} from {uk_datetime(slot.starts)} "
-                f"until {uk_datetime(slot.ends)}",
+                summary=f"{_slot_value(slot)} from {uk_when(slot.starts, as_of)} "
+                f"until {uk_when(slot.ends, as_of)}",
             )
         )
     return out
@@ -130,8 +152,6 @@ class HeatingZoneView(BaseModel):
     frost_protection_c: float | None = None
     heating_now: bool | None = Field(None, description="Calling for heat at this moment")
     boost: BoostView
-    min_temp_c: float
-    max_temp_c: float
     battery_pct: int | None = None
     low_battery: bool = False
     schedule: list[SlotView] = Field(default_factory=list)
@@ -154,7 +174,7 @@ def heating_view(st: HeatingStatus) -> HeatingZoneView:
         heating_now=st.heating_on,
         boost=_boost_view(st.boost.active, st.boost.minutes_remaining, st.as_of),
         low_battery=low,
-        schedule=schedule_view(st.schedule),
+        schedule=schedule_view(st.schedule, st.as_of),
         summary=heating_summary(st),
     )
 
@@ -176,7 +196,7 @@ def heating_summary(st: HeatingStatus) -> str:
     sentence = ", ".join(parts) + "."
     if st.schedule and st.mode == "SCHEDULE" and not st.boost.active:
         nxt = st.schedule.next
-        sentence += f" Next: {celsius(nxt.target_c)} from {uk_datetime(nxt.starts)}."
+        sentence += f" Next: {celsius(nxt.target_c)} from {uk_when(nxt.starts, st.as_of)}."
     if st.battery_pct is not None and st.battery_pct <= LOW_BATTERY_PCT:
         sentence += f" Battery low ({st.battery_pct}%)."
     return sentence
@@ -202,7 +222,7 @@ def hot_water_view(st: HotWaterStatus, snap: HiveSnapshot) -> HotWaterView:
         **freshness(snap).model_dump(),
         **st.model_dump(exclude={"boost", "schedule", "as_of"}),
         boost=_boost_view(st.boost.active, st.boost.minutes_remaining, st.as_of),
-        schedule=schedule_view(st.schedule),
+        schedule=schedule_view(st.schedule, st.as_of),
         summary=hot_water_summary(st),
     )
 
@@ -218,5 +238,5 @@ def hot_water_summary(st: HotWaterStatus) -> str:
     sentence = f"Hot water is {state}, {mode.get(st.mode or '', 'in an unknown mode')}."
     if st.schedule and st.mode == "SCHEDULE":
         nxt = st.schedule.next
-        sentence += f" Next: {_slot_value(nxt)} from {uk_datetime(nxt.starts)}."
+        sentence += f" Next: {_slot_value(nxt)} from {uk_when(nxt.starts, st.as_of)}."
     return sentence
