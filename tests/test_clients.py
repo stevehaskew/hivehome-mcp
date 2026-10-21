@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import timedelta
 from pathlib import Path
 from typing import Any
@@ -12,7 +13,7 @@ from hive_mcp.auth import ReauthRequired
 from hive_mcp.config import Settings
 from hive_mcp.credentials import Credentials, CredentialsMissing, CredentialStore, DeviceData
 from hive_mcp.fake_client import FakeHiveClient
-from hive_mcp.hive_client import HiveUnavailable, LiveHiveClient, make_client
+from hive_mcp.hive_client import HiveUnavailable, LiveHiveClient, WriteFailed, make_client
 
 from .conftest import MemoryKeyring
 
@@ -56,6 +57,18 @@ class _Data:
         self.devices: dict[str, Any] = {"d": {}}
 
 
+class _Api:
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, str, dict[str, Any]]] = []
+        self.result: dict[str, Any] | BaseException = {"original": 200, "parsed": {}}
+
+    async def setState(self, n_type: str, n_id: str, **kwargs: Any) -> dict[str, Any]:  # noqa: N802
+        self.calls.append((n_type, n_id, kwargs))
+        if isinstance(self.result, BaseException):
+            raise self.result
+        return self.result
+
+
 class StubHive:
     """Mimics the parts of ManagedHive that LiveHiveClient uses."""
 
@@ -68,7 +81,12 @@ class StubHive:
         self.refreshes = 0
         self.refresh_result: bool | BaseException = True
         self.closed = False
+        self.api = _Api()
+        self.token_checks = 0
         StubHive.instances.append(self)
+
+    async def hiveRefreshTokens(self) -> None:  # noqa: N802
+        self.token_checks += 1
 
     async def start(self) -> dict[str, Any]:
         if StubHive.start_error:
@@ -163,3 +181,58 @@ async def test_live_close(live: LiveHiveClient) -> None:
 
 def test_unavailable_is_an_error() -> None:
     assert issubclass(HiveUnavailable, RuntimeError)
+
+
+async def test_live_refresh_skips_the_cache(live: LiveHiveClient) -> None:
+    await live.snapshot()
+    snap = await live.snapshot(refresh=True)
+    assert StubHive.instances[0].refreshes == 1
+    assert snap.products["p"]["state"]["target"] == 11
+
+
+async def test_live_write_sends_set_state_then_refreshes(live: LiveHiveClient) -> None:
+    await live.snapshot()
+    snap = await live.write("heating", "p", {"target": 12})
+    hive = StubHive.instances[0]
+    assert hive.api.calls == [("heating", "p", {"target": 12})]
+    assert hive.token_checks == 1
+    assert hive.refreshes == 1  # forced, although the cache was fresh
+    assert snap.products["p"]["state"]["target"] == 11
+
+
+@pytest.mark.parametrize(
+    ("result", "message"),
+    [
+        ({"original": 500, "parsed": {}}, "HTTP 500"),
+        ({}, "HTTP None"),  # the library returns {} after some errors
+        (OSError("boom"), "Couldn't reach Hive (OSError)"),
+        (KeyError("original"), "Couldn't reach Hive (KeyError)"),
+    ],
+)
+async def test_live_write_failures(live: LiveHiveClient, result: Any, message: str) -> None:
+    await live.snapshot()
+    StubHive.instances[0].api.result = result
+    with pytest.raises(WriteFailed, match=re.escape(message)):
+        await live.write("heating", "p", {"target": 12})
+    assert StubHive.instances[0].refreshes == 0
+
+
+async def test_live_write_auth_error_needs_sign_in(live: LiveHiveClient) -> None:
+    await live.snapshot()
+    StubHive.instances[0].api.result = hive_exceptions.HiveAuthError("401")
+    with pytest.raises(ReauthRequired):
+        await live.write("heating", "p", {"target": 12})
+
+
+async def test_fake_client_records_and_applies_writes() -> None:
+    client = FakeHiveClient(FIXTURE)
+    snap = await client.write("heating", "id-16", {"mode": "BOOST", "boost": 30, "target": 20})
+    state = snap.products["id-16"]["state"]
+    assert (state["mode"], state["boost"], state["target"]) == ("BOOST", 30, 20)
+    assert snap.products["id-16"]["props"]["previous"] == {"mode": "OFF", "target": 7}
+    snap = await client.write("heating", "id-16", {"mode": "OFF", "target": 7})
+    assert "boost" not in snap.products["id-16"]["state"]
+    assert client.writes[0] == ("heating", "id-16", {"mode": "BOOST", "boost": 30, "target": 20})
+    client.fail_writes = "nope"
+    with pytest.raises(WriteFailed, match="nope"):
+        await client.write("heating", "id-16", {"target": 12})

@@ -1,6 +1,6 @@
 # Hive MCP server: plan and status
 
-*Last updated 21/10/2026. Read-only server finished, polished and in use from Claude Code and Claude Desktop. Next: write tools (§6), only when the user says go.*
+*Last updated 21/10/2026. Read-only server finished and in use from Claude Code and Claude Desktop. Write tools built behind `HIVE_MCP_ALLOW_WRITES`, tested against the fake client, and checked live on Thermostat 3. They aren't turned on in any app config yet.*
 
 A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later control, a Hive Active Heating system. It's built on the unofficial `pyhive-integration` library, which can break without notice. UK conventions throughout: °C, DD/MM/YYYY, 24-hour, British English.
 
@@ -11,9 +11,9 @@ A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later con
 | Login / 2FA / device trust | ✅ `hive-mcp login`, `logout`, `status [--simulate-expiry]`. Credentials in the macOS Keychain. Unattended re-login verified live. |
 | Read-only MCP tools | ✅ `list_devices`, `get_heating_status`, `get_hot_water_status`, `get_schedule`, verified live against the real account. |
 | Claude Code registration | ✅ Project scope (`.mcp.json`, gitignored; `.mcp.json.example` is committed), approved via `.claude/settings.local.json`. Used from a fresh session 21/10/2026. |
-| Tests | ✅ 89 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
+| Tests | ✅ 184 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
 | Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Checked in the app after a restart. |
-| Write tools | ⏳ Not started. Must stay behind `HIVE_MCP_ALLOW_WRITES` (§6). |
+| Write tools | ✅ Built behind `HIVE_MCP_ALLOW_WRITES` (§6), tested end to end against `FakeHiveClient`, boiler-zone heating checked live 21/10/2026. Not turned on in any app config yet. |
 | Version control | ✅ git, `main`, remote `github.com/stevehaskew/hivehome-mcp` (public). |
 
 The spike's test device and its Keychain entry (`hive-mcp-spike`) have been removed.
@@ -23,7 +23,9 @@ The spike's test device and its Keychain entry (`hive-mcp-spike`) have been remo
 ```
 src/hive_mcp/
   __main__.py      CLI: serve | login | logout | status | show
-  server.py        FastMCP app; read-only tools; turns known failures into ToolErrors
+  server.py        FastMCP app; read tools, write tools (only if allowed); known failures -> ToolErrors
+  writes.py        Pure write planning: limits, mode rules, setState kwargs, "did it take?"
+  audit.py         audit.log: one JSON line per write attempt, own rotating file
   views.py         Tool outputs: numbers + UK-formatted times + one-sentence summaries
                    ("tomorrow 02:00" in sentences, full DD/MM/YYYY in fields)
   readings.py      Pure functions: raw Hive JSON -> typed readings (names, availability,
@@ -31,9 +33,9 @@ src/hive_mcp/
                    week, repeats merged, DST-safe)
   models.py        Pydantic reading models (values, aware datetimes)
   snapshot.py      HiveSnapshot (raw products/devices + fetched_at + stale) and LONDON tz
-  hive_client.py   HiveClient Protocol, LiveHiveClient (lazy sign-in, cache, stale fallback),
-                   make_client(settings)
-  fake_client.py   FakeHiveClient: serves tests/fixtures/hive_sample.json
+  hive_client.py   HiveClient Protocol, LiveHiveClient (lazy sign-in, cache, stale fallback,
+                   write = setState + forced refresh), make_client(settings)
+  fake_client.py   FakeHiveClient: serves tests/fixtures/hive_sample.json; records and applies writes
   auth.py          interactive_login, device_login, forget_device, ManagedHive (library fixes)
   credentials.py   One Keychain item (service "hive-mcp", account "credentials"), env overrides
   config.py        Settings from env vars (see README)
@@ -59,7 +61,11 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
 - Importing `apyhiveapi.hive` replaces `sys.excepthook` with one that logs local variables, which could include the password. `_hivelib.py` puts the original back.
 - `is_device_registered()` returns `False` even for a working, registered device. Don't rely on it.
 - The library logs about 24 `KeyError 'zone'` warnings per TRV per poll. They're harmless; our logging keeps them out of stderr and removes duplicates in the file.
-- **All the library's setters** (`setTargetTemperature`, `setMode`, `setBoostOn`, …) end up calling `session.api.setState(product_type, product_id, **kwargs)` followed by `getDevices()`. For example `target=21`, `mode="SCHEDULE"`, or `mode="BOOST", boost=mins, target=temp`. The write tools can call `setState` directly with product ids, as the readings do, rather than building the library's `deviceList` dicts. Before using them, check `setBoostOff` and the hot-water setters (`hotwater.py`) for their exact kwargs.
+- **Setters** (checked 21/10/2026 in `heating.py`, `hotwater.py`): all call `hiveRefreshTokens()`, then `api.setState(product_type, product_id, **kwargs)` (POST `/nodes/{type}/{id}`, **every value sent as a string**), then `getDevices()`. We call `setState` directly with product ids.
+  - Heating: `target=t`; `mode=SCHEDULE|MANUAL|OFF`; boost `mode=BOOST, boost=mins, target=t`. Boost off sends `mode=props.previous.mode`, plus `target=previous.target` (default 7) when that mode is MANUAL or OFF.
+  - Hot water: `mode=…` passed straight through; boost `mode=BOOST, boost=mins`; boost off `mode=previous.mode`. Hive stores "on" as `MANUAL`, so we send `MANUAL` for ON (**to confirm live**).
+  - **TRV zones** (`trvcontrol`) go through the same class with the same kwargs, under their own type. Their `props.previous` is `{}` when not boosting, so cancelling a TRV boost falls back to SCHEDULE if Hive gives no previous mode. TRV writes are untested live.
+  - `setState` error handling is poor: 401/403 raise `HiveAuthError`, network errors a bare `HTTPError`, and some failures return `{}` with no `"original"`. `LiveHiveClient.write` catches all of these and treats anything other than 200 as failed.
 
 ## 3. The live system (from the spike and live runs)
 
@@ -97,18 +103,19 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
    - ✅ (21/10/2026) Summaries use `views.uk_when`: "22:00", "tomorrow 02:00", "yesterday 21:30", "Fri 09:00" within the coming week, otherwise the full date. The structured `starts`/`ends`/`as_of` fields keep full DD/MM/YYYY dates.
    - ✅ (21/10/2026) `min_temp_c`/`max_temp_c` are gone (they were constants, not read from Hive; the write tools will have their own limits, §6). `controller` is only given when it isn't the zone's own thermostat, i.e. for hot water.
    - ✅ (21/10/2026) `get_schedule(zone)` returns the full weekly schedule for a heating zone or the hot water (`readings.week_days`). Each day runs midnight to midnight, opening with the setting carried over from the day before, with repeats merged. It also says whether the schedule is in use (`in_force`); OFF zones still have a stored schedule.
-5. **Write tools (phase 2).** See §6. **Don't start until the user says so.** Before writing code:
-   - Read the library's setters in `.venv/lib/python3.12/site-packages/apyhiveapi/` (`heating.py`, `hotwater.py`, `trv`) for the exact `setState` kwargs, especially boost off and the hot water modes, and whether TRV zones (`trvcontrol`) take the same kwargs as boiler zones.
-   - Agree the open design points with the user: the 5–25°C and 15–120 minute limits, whether OFF/MANUAL changes need any extra confirmation, and the shape of the audit log.
-   - Testing a live write needs the user's say-so each time, as it changes a real building's heating. Prefer a zone nobody is using (Thermostat 3 is OFF), and put it back afterwards.
+5. **Write tools (phase 2).** See §6. Go-ahead given 21/10/2026; setters read (§2) and design agreed with the user.
+   - ✅ Built and tested against `FakeHiveClient` (21/10/2026).
+   - ✅ Live check 21/10/2026 (user approved), on Thermostat 3 at 12°C, below the room's 18.6°C so the boiler never fired: MANUAL 12°C → 15-minute boost at 12°C → cancel (back to MANUAL 12°C) → OFF. Every step confirmed by the fresh reading and audited. **Straight after `mode=OFF`, Hive still reported target 12°C**, and it settled back to 7°C about a minute later. So OFF now also sends `target=frostProtection`, like the library's boost-off. Thermostat 3 ended exactly as found (OFF, 7°C).
+   - Still unconfirmed live: hot water ON=MANUAL (the user chose to skip it), TRV zone writes, and the OFF+target form (covered by the tests; it's the same kwargs the library's boost-off sends).
+   - Then the user decides whether to turn writes on in `.mcp.json` / Claude Desktop (`"env": {"HIVE_MCP_ALLOW_WRITES": "1"}`).
 6. **Upstream:** report the two library bugs (§2) to `Pyhass/Pyhive` after checking 2.0.0b4. Ask the user before posting anything publicly.
 
-## 6. Phase 2: write tools (design notes, not built)
+## 6. Phase 2: write tools (built 21/10/2026)
 
-From the original brief: clamp temperatures, cap boost durations, log every write, and keep writes behind a config flag.
+From the original brief: limit temperatures, cap boost durations, log every write, and keep writes behind a config flag. Agreed with the user 21/10/2026.
 
-- **Flag:** `HIVE_MCP_ALLOW_WRITES` (already in `Settings.allow_writes`, default off). While it's off, the write tools **aren't registered at all**.
-- **Proposed tools:**
+- **Flag:** `HIVE_MCP_ALLOW_WRITES` (`Settings.allow_writes`, default off). While it's off, the write tools **aren't registered at all**. They also aren't registered if the audit log can't be opened.
+- **Tools:**
   - `set_target_temperature(zone, temp_c)`
   - `set_heating_mode(zone, SCHEDULE|MANUAL|OFF)`
   - `boost_heating(zone, minutes, temp_c)` / `cancel_heating_boost(zone)`
@@ -117,11 +124,17 @@ From the original brief: clamp temperatures, cap boost durations, log every writ
 - **Safety limits** (constants, enforced server-side):
   - Target and boost temperatures within **5–25°C**. Hive allows 5–32°C.
   - Boost at most **120 minutes**, minimum 15.
-  - Reject values out of range rather than silently clamping them, and say what the limits are.
-  - Refuse to write to an unavailable zone.
-- **Audit log:** a separate file `~/Library/Logs/hive-mcp/audit.log`. One line per write attempt with the time (UK), tool, zone name and id, the values before, the requested values, the result, and the values after the refresh.
-- **Implementation:** a `write` method on `LiveHiveClient` that calls `hive.api.setState(product_type, product_id, **kwargs)` under the client lock, checks for HTTP 200, then forces a refresh and drops the cached snapshot. `FakeHiveClient` records writes and updates its in-memory products, so the tools can be tested end to end.
-- **Tool annotations:** `readOnlyHint: false`, `destructiveHint: false`, `idempotentHint: true` for the set-value tools. Each response says what changed, e.g. "Main Hall target changed from 10°C to 18°C".
+  - Temperatures in 0.5°C steps.
+  - Values out of range are rejected, not clamped, and the message gives the limits.
+  - Unavailable zones are refused, as is a new boost while one is running ("cancel it first").
+- **Mode rules** (agreed):
+  - `set_target_temperature` in SCHEDULE is Hive's temporary override until the next slot (the reply says when). It's refused for OFF ("use set_heating_mode") and while boosting.
+  - `set_heating_mode` MANUAL **requires** `temp_c` (sent as mode+target in one call); SCHEDULE/OFF take none. Setting a mode ends a boost.
+  - No extra confirmation step for OFF/MANUAL: the client's approval prompt is enough. The reply says it stays until someone changes it.
+  - Already set that way, or no boost to cancel: nothing is sent (`no_change`).
+- **Flow per call** (`server._add_write_tools.perform`): fresh read (`snapshot(refresh=True)`; refused if stale) → `writes.plan_*` → `client.write` (setState under the lock, HTTP 200 check, forced refresh) → `writes.unconfirmed` compares the fresh reading with what was expected → reply with `changed`, `confirmed`, `summary` ("Thermostat 3 changed from OFF to MANUAL at 12°C. …") and `now`.
+- **Audit log:** `~/Library/Logs/hive-mcp/audit.log`, JSON lines (1 MB × 10 files), kept out of the main log. Fields: `time` (DD/MM/YYYY HH:MM:SS UK), `tool`, `zone`, `id`, `before`, `requested`, `sent`, `result` (`ok`/`unconfirmed`/`no_change`/`rejected`/`failed`), `reason`, `after`. Refused attempts are logged too.
+- **Tool annotations:** `readOnlyHint: false`, `destructiveHint: false`. `idempotentHint` is true for the set-value and cancel tools and false for the boost tools.
 
 ## 7. Risks
 

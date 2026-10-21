@@ -29,7 +29,7 @@ class FixedClient(FakeHiveClient):
     stale = False
     closed = False
 
-    async def snapshot(self) -> HiveSnapshot:
+    async def snapshot(self, *, refresh: bool = False) -> HiveSnapshot:
         snap = await super().snapshot()
         return dataclasses.replace(snap, fetched_at=NOW, stale=self.stale)
 
@@ -41,7 +41,12 @@ class FailingClient:
     def __init__(self, error: Exception) -> None:
         self.error = error
 
-    async def snapshot(self) -> HiveSnapshot:
+    async def snapshot(self, *, refresh: bool = False) -> HiveSnapshot:
+        raise self.error
+
+    async def write(
+        self, product_type: str, product_id: str, kwargs: dict[str, Any]
+    ) -> HiveSnapshot:
         raise self.error
 
     async def close(self) -> None:

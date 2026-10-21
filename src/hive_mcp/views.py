@@ -11,6 +11,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from . import readings
 from .models import (
     DeviceSummary,
     HeatingStatus,
@@ -329,3 +330,26 @@ def weekly_summary(ws: WeeklySchedule, in_force: bool) -> str:
     now = {"OFF": "switched off", "MANUAL": "on a fixed target", "ON": "set to always on"}
     state = now.get(ws.mode or "", "in an unknown mode")
     return f"Weekly schedule for {ws.name}. It isn't in use: {ws.name} is {state}."
+
+
+# --- writes ------------------------------------------------------------------------
+
+
+class WriteResultView(Freshness):
+    zone: str
+    id: str
+    changed: bool = Field(description="False if it was already set that way and nothing was sent")
+    confirmed: bool = Field(
+        description="Hive's fresh reading shows the change (or no change was needed)"
+    )
+    summary: str = Field(description="What changed, and anything to tell the user")
+    now: str = Field(
+        description="The zone's state after the change, as get_heating_status gives it"
+    )
+
+
+def device_summary(snap: HiveSnapshot, product_id: str) -> str:
+    """The one-sentence summary for a heating zone or the hot water."""
+    if snap.products[product_id].get("type") in readings.HOT_WATER_TYPES:
+        return hot_water_summary(readings.hot_water_status(snap, product_id))
+    return heating_summary(readings.heating_status(snap, product_id))
