@@ -121,3 +121,7 @@ uv run pytest
 uv run ruff check . && uv run ruff format --check .
 uv run mypy
 ```
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
