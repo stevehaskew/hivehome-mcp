@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+spike/out/
+.claude/settings.local.json
+.mcp.json

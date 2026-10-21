@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "hive": {
+      "type": "stdio",
+      "command": "/opt/homebrew/bin/uv",
+      "args": [
+        "--directory",
+        "/path/to/hivehome-mcp",
+        "run",
+        "hive-mcp",
+        "serve"
+      ],
+      "env": {}
+    }
+  }
+}

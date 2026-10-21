@@ -1,0 +1,5489 @@
+{
+  "products": {
+    "id-1": {
+      "id": "id-1",
+      "type": "trvcontrol",
+      "sortOrder": 1,
+      "created": 1710456740508,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "version": "00000000",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "parent": "id-1",
+        "capabilities": [
+          "HOLIDAY_MODE",
+          "BOOST",
+          "TRV_AUTO_BOOST",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "maxEvents": 6,
+        "pmz": "OK",
+        "temperature": 16.2,
+        "working": false,
+        "trvs": [
+          "id-3"
+        ],
+        "consumers": [
+          "id-3"
+        ],
+        "previous": {},
+        "scheduleOverride": false,
+        "zoneName": "Upstairs",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        }
+      },
+      "state": {
+        "name": "Creche",
+        "mode": "SCHEDULE",
+        "target": 12,
+        "frostProtection": 7,
+        "schedule": {
+          "monday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-26 02:00:00"
+            },
+            {
+              "start": 840,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-26 14:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-26 22:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-27 02:00:00"
+            },
+            {
+              "start": 840,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-27 14:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-27 22:00:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-28 02:00:00"
+            },
+            {
+              "start": 780,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-28 13:00:00"
+            },
+            {
+              "start": 900,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-28 15:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-21 22:00:00",
+              "End_DateTime": "2026-10-22 02:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-22 02:00:00",
+              "End_DateTime": "2026-10-22 12:00:00"
+            },
+            {
+              "start": 720,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-22 12:00:00",
+              "End_DateTime": "2026-10-22 22:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-22 22:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-23 02:00:00"
+            },
+            {
+              "start": 720,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-23 12:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-23 22:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-24 07:00:00"
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-24 18:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-24 23:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-25 02:00:00"
+            },
+            {
+              "start": 780,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-25 13:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-25 22:00:00"
+            }
+          ]
+        },
+        "autoBoost": "ENABLED",
+        "zone": "id-4"
+      },
+      "isGroup": false
+    },
+    "id-5": {
+      "id": "id-5",
+      "type": "trvcontrol",
+      "sortOrder": 1,
+      "created": 1710457335581,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "version": "00000000",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "parent": "id-5",
+        "capabilities": [
+          "HOLIDAY_MODE",
+          "BOOST",
+          "TRV_AUTO_BOOST",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "maxEvents": 6,
+        "pmz": "OK",
+        "temperature": 16.9,
+        "working": false,
+        "trvs": [
+          "id-6"
+        ],
+        "consumers": [
+          "id-6"
+        ],
+        "previous": {
+          "mode": "SCHEDULE"
+        },
+        "scheduleOverride": false,
+        "zoneName": "Upstairs",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        }
+      },
+      "state": {
+        "name": "Office A",
+        "mode": "OFF",
+        "target": 7,
+        "frostProtection": 7,
+        "schedule": {
+          "monday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              }
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              }
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 17
+              }
+            }
+          ],
+          "tuesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              }
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              }
+            },
+            {
+              "start": 900,
+              "value": {
+                "target": 15
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 17
+              }
+            }
+          ],
+          "wednesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              }
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              }
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 17
+              }
+            }
+          ],
+          "thursday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              }
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              }
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 17
+              }
+            }
+          ],
+          "friday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              }
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              }
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 10
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              }
+            }
+          ],
+          "saturday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              }
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 10
+              }
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              }
+            }
+          ],
+          "sunday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              }
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 15
+              }
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 17
+              }
+            }
+          ]
+        },
+        "autoBoost": "ENABLED",
+        "zone": "id-4"
+      },
+      "isGroup": false
+    },
+    "id-7": {
+      "id": "id-7",
+      "type": "heating",
+      "sortOrder": 1,
+      "created": 1694299367105,
+      "lastSeen": 1730754860353,
+      "parent": "id-8",
+      "props": {
+        "online": false,
+        "version": "00000000",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        }
+      },
+      "state": {
+        "name": "Downstairs"
+      },
+      "error": "MALFORMED_NODE_DESCRIPTOR"
+    },
+    "id-9": {
+      "id": "id-9",
+      "type": "trvcontrol",
+      "sortOrder": 1,
+      "created": 1710457607870,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "version": "00000000",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "parent": "id-9",
+        "capabilities": [
+          "HOLIDAY_MODE",
+          "BOOST",
+          "TRV_AUTO_BOOST",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "maxEvents": 6,
+        "pmz": "OK",
+        "temperature": 17.6,
+        "working": false,
+        "trvs": [
+          "id-10"
+        ],
+        "consumers": [
+          "id-10"
+        ],
+        "previous": {},
+        "scheduleOverride": false,
+        "zoneName": "Upstairs",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        }
+      },
+      "state": {
+        "name": "Office B",
+        "mode": "SCHEDULE",
+        "target": 15,
+        "frostProtection": 7,
+        "schedule": {
+          "monday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-26 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-26 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-26 17:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-26 23:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-27 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-27 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-27 17:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-27 23:00:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-28 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-28 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-21 17:00:00",
+              "End_DateTime": "2026-10-21 23:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-21 23:00:00",
+              "End_DateTime": "2026-10-22 02:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-22 02:00:00",
+              "End_DateTime": "2026-10-22 05:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-22 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-22 17:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-22 23:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-23 07:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-23 17:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-23 23:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-24 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-24 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-24 17:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-24 23:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-25 07:00:00"
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-25 18:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-25 23:00:00"
+            }
+          ]
+        },
+        "autoBoost": "ENABLED",
+        "zone": "id-4"
+      },
+      "isGroup": false
+    },
+    "id-11": {
+      "id": "id-11",
+      "type": "heating",
+      "sortOrder": 1,
+      "created": 1694298046534,
+      "lastSeen": 1694298771863,
+      "parent": "id-12",
+      "props": {
+        "online": true,
+        "model": "SLR1",
+        "version": "00136620",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "BOOST",
+          "OPTIMUM_START",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "holidayMode": {
+          "active": false,
+          "enabled": false,
+          "start": null,
+          "end": null,
+          "temperature": 10
+        },
+        "modelVariant": "SLR1c",
+        "working": false,
+        "pmz": "OK",
+        "previous": {
+          "mode": "SCHEDULE"
+        },
+        "scheduleOverride": false,
+        "temperature": 18.48,
+        "zone": "id-12",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        },
+        "readyBy": false
+      },
+      "state": {
+        "name": "Main Hall",
+        "boost": null,
+        "frostProtection": 7,
+        "mode": "SCHEDULE",
+        "schedule": {
+          "monday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 0,
+              "Start_DateTime": "2026-10-26 00:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-26 07:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 540,
+              "Start_DateTime": "2026-10-26 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 660,
+              "Start_DateTime": "2026-10-26 11:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 900,
+              "Start_DateTime": "2026-10-26 15:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1140,
+              "Start_DateTime": "2026-10-26 19:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-27 01:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 360,
+              "Start_DateTime": "2026-10-27 06:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 690,
+              "Start_DateTime": "2026-10-27 11:30:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1140,
+              "Start_DateTime": "2026-10-27 19:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-27 22:00:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-28 01:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-28 05:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 540,
+              "Start_DateTime": "2026-10-28 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-28 12:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-28 17:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1290,
+              "Start_DateTime": "2026-10-21 21:30:00",
+              "End_DateTime": "2026-10-22 01:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-22 01:00:00",
+              "End_DateTime": "2026-10-22 05:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-22 05:00:00",
+              "End_DateTime": "2026-10-22 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 540,
+              "Start_DateTime": "2026-10-22 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-22 22:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-23 01:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-23 05:00:00"
+            },
+            {
+              "value": {
+                "target": 10.5
+              },
+              "start": 540,
+              "Start_DateTime": "2026-10-23 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-23 12:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 960,
+              "Start_DateTime": "2026-10-23 16:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-23 22:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-24 01:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-24 05:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 540,
+              "Start_DateTime": "2026-10-24 09:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-24 12:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 900,
+              "Start_DateTime": "2026-10-24 15:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1260,
+              "Start_DateTime": "2026-10-24 21:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 180,
+              "Start_DateTime": "2026-10-25 03:00:00"
+            },
+            {
+              "value": {
+                "target": 17.5
+              },
+              "start": 360,
+              "Start_DateTime": "2026-10-25 06:00:00"
+            },
+            {
+              "value": {
+                "target": 19.5
+              },
+              "start": 480,
+              "Start_DateTime": "2026-10-25 08:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 615,
+              "Start_DateTime": "2026-10-25 10:15:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 900,
+              "Start_DateTime": "2026-10-25 15:00:00"
+            },
+            {
+              "value": {
+                "target": 10
+              },
+              "start": 1050,
+              "Start_DateTime": "2026-10-25 17:30:00"
+            }
+          ]
+        },
+        "target": 10,
+        "optimumStart": false,
+        "autoBoost": "ENABLED"
+      }
+    },
+    "id-13": {
+      "id": "id-13",
+      "type": "trvcontrol",
+      "sortOrder": 1,
+      "created": 1710457067498,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "version": "00000000",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "parent": "id-13",
+        "capabilities": [
+          "HOLIDAY_MODE",
+          "BOOST",
+          "TRV_AUTO_BOOST",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "maxEvents": 6,
+        "pmz": "OK",
+        "temperature": 18.4,
+        "working": false,
+        "trvs": [
+          "id-14"
+        ],
+        "consumers": [
+          "id-14"
+        ],
+        "previous": {},
+        "scheduleOverride": false,
+        "zoneName": "Upstairs",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        }
+      },
+      "state": {
+        "name": "Oak Room",
+        "mode": "SCHEDULE",
+        "target": 10,
+        "frostProtection": 7,
+        "schedule": {
+          "monday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-26 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-26 05:00:00"
+            },
+            {
+              "start": 960,
+              "value": {
+                "target": 17.5
+              },
+              "Start_DateTime": "2026-10-26 16:00:00"
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-26 18:00:00"
+            },
+            {
+              "start": 1395,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-26 23:15:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-27 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-27 05:00:00"
+            },
+            {
+              "start": 960,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-27 16:00:00"
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-27 18:00:00"
+            },
+            {
+              "start": 1350,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-27 22:30:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 18
+              },
+              "Start_DateTime": "2026-10-28 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-28 05:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-21 17:00:00",
+              "End_DateTime": "2026-10-21 23:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-21 23:00:00",
+              "End_DateTime": "2026-10-22 09:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "start": 540,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-22 09:00:00",
+              "End_DateTime": "2026-10-22 17:00:00"
+            },
+            {
+              "start": 1020,
+              "value": {
+                "target": 12
+              },
+              "Start_DateTime": "2026-10-22 17:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-22 22:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-23 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-23 05:00:00"
+            },
+            {
+              "start": 960,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-23 16:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-23 23:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "start": 120,
+              "value": {
+                "target": 17
+              },
+              "Start_DateTime": "2026-10-24 02:00:00"
+            },
+            {
+              "start": 300,
+              "value": {
+                "target": 20
+              },
+              "Start_DateTime": "2026-10-24 05:00:00"
+            },
+            {
+              "start": 780,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-24 13:00:00"
+            },
+            {
+              "start": 1380,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-24 23:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "start": 420,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-25 07:00:00"
+            },
+            {
+              "start": 1080,
+              "value": {
+                "target": 10
+              },
+              "Start_DateTime": "2026-10-25 18:00:00"
+            },
+            {
+              "start": 1320,
+              "value": {
+                "target": 15
+              },
+              "Start_DateTime": "2026-10-25 22:00:00"
+            }
+          ]
+        },
+        "autoBoost": "ENABLED",
+        "zone": "id-4"
+      },
+      "isGroup": false
+    },
+    "id-15": {
+      "id": "id-15",
+      "type": "heating",
+      "sortOrder": 1,
+      "created": 1694298640464,
+      "lastSeen": 1694298800872,
+      "parent": "id-4",
+      "props": {
+        "online": true,
+        "model": "SLR1",
+        "version": "00136620",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "BOOST",
+          "OPTIMUM_START",
+          "TRV_AUTO_BOOST",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "holidayMode": {
+          "active": false,
+          "enabled": false,
+          "start": null,
+          "end": null,
+          "temperature": 10
+        },
+        "modelVariant": "SLR1c",
+        "working": false,
+        "pmz": "OK",
+        "previous": {
+          "mode": "SCHEDULE"
+        },
+        "scheduleOverride": false,
+        "temperature": 19.02,
+        "zone": "id-4",
+        "failureTimestamp": 1708820966881,
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        },
+        "readyBy": false
+      },
+      "state": {
+        "name": "Upstairs",
+        "boost": null,
+        "frostProtection": 7,
+        "mode": "SCHEDULE",
+        "schedule": {
+          "monday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-26 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-26 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-26 07:00:00"
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-26 17:00:00"
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 1200,
+              "Start_DateTime": "2026-10-26 20:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-26 23:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-27 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-27 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-27 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-27 17:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1080,
+              "Start_DateTime": "2026-10-27 18:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-27 23:00:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-28 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-28 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-28 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-28 17:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1080,
+              "Start_DateTime": "2026-10-21 18:00:00",
+              "End_DateTime": "2026-10-21 23:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-21 23:00:00",
+              "End_DateTime": "2026-10-22 02:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-22 02:00:00",
+              "End_DateTime": "2026-10-22 05:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-22 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-22 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-22 17:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1080,
+              "Start_DateTime": "2026-10-22 18:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-22 23:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-23 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-23 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-23 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-23 17:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1080,
+              "Start_DateTime": "2026-10-23 18:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-23 23:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-24 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-24 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-24 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1020,
+              "Start_DateTime": "2026-10-24 17:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1080,
+              "Start_DateTime": "2026-10-24 18:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1380,
+              "Start_DateTime": "2026-10-24 23:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 120,
+              "Start_DateTime": "2026-10-25 02:00:00"
+            },
+            {
+              "value": {
+                "target": 17
+              },
+              "start": 300,
+              "Start_DateTime": "2026-10-25 05:00:00"
+            },
+            {
+              "value": {
+                "target": 20
+              },
+              "start": 420,
+              "Start_DateTime": "2026-10-25 07:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-25 12:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 840,
+              "Start_DateTime": "2026-10-25 14:00:00"
+            },
+            {
+              "value": {
+                "target": 15
+              },
+              "start": 1065,
+              "Start_DateTime": "2026-10-25 17:45:00"
+            }
+          ]
+        },
+        "target": 15,
+        "optimumStart": false,
+        "failureStatus": "NORMAL",
+        "autoBoost": "ENABLED"
+      }
+    },
+    "id-16": {
+      "id": "id-16",
+      "type": "heating",
+      "sortOrder": 1,
+      "created": 1730755871573,
+      "parent": "id-17",
+      "props": {
+        "online": true,
+        "model": "SLR2",
+        "version": "03025700",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "BOOST",
+          "OPTIMUM_START",
+          "TRV_AUTO_BOOST_READY"
+        ],
+        "holidayMode": {
+          "active": false,
+          "enabled": false,
+          "start": null,
+          "end": null,
+          "temperature": 7
+        },
+        "modelVariant": "SLR2b",
+        "working": false,
+        "pmz": "OK",
+        "previous": {
+          "mode": "OFF"
+        },
+        "scheduleOverride": false,
+        "temperature": 20.07,
+        "zone": "id-17",
+        "autoBoost": {
+          "active": false,
+          "duration": 30,
+          "trvs": []
+        },
+        "readyBy": false
+      },
+      "state": {
+        "name": "Zone 1",
+        "boost": null,
+        "frostProtection": 7,
+        "mode": "OFF",
+        "schedule": {
+          "monday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 450
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 720
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 870
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1110
+            }
+          ],
+          "tuesday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 600
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 885
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1320
+            }
+          ],
+          "wednesday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 420
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 900
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 990
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1290
+            }
+          ],
+          "thursday": [
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 405
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 420
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 705
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 840
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1320
+            }
+          ],
+          "friday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 510
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 720
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 840
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1320
+            }
+          ],
+          "saturday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 420
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 720
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 735
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 840
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1320
+            }
+          ],
+          "sunday": [
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 390
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 780
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 840
+            },
+            {
+              "value": {
+                "target": 19
+              },
+              "start": 990
+            },
+            {
+              "value": {
+                "target": 7
+              },
+              "start": 1200
+            }
+          ]
+        },
+        "target": 7,
+        "optimumStart": false,
+        "autoBoost": "ENABLED"
+      }
+    },
+    "id-18": {
+      "id": "id-18",
+      "type": "hotwater",
+      "sortOrder": 2,
+      "created": 1730755871604,
+      "parent": "id-17",
+      "props": {
+        "online": true,
+        "model": "SLR2",
+        "version": "03025700",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "modelVariant": "SLR2b",
+        "zone": "id-17",
+        "working": false,
+        "holidayMode": {
+          "active": false,
+          "enabled": false,
+          "start": null,
+          "end": null
+        },
+        "capabilities": [
+          "INFORMATION",
+          "HOLIDAY_MODE",
+          "BOOST"
+        ],
+        "previous": {
+          "mode": "SCHEDULE"
+        },
+        "pmz": "OK"
+      },
+      "state": {
+        "name": "Zone 1",
+        "mode": "SCHEDULE",
+        "schedule": {
+          "monday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-26 01:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 750,
+              "Start_DateTime": "2026-10-26 12:30:00"
+            },
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 960,
+              "Start_DateTime": "2026-10-26 16:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1200,
+              "Start_DateTime": "2026-10-26 20:00:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-27 01:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 900,
+              "Start_DateTime": "2026-10-27 15:00:00"
+            },
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 960,
+              "Start_DateTime": "2026-10-27 16:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1140,
+              "Start_DateTime": "2026-10-27 19:00:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-28 01:00:00"
+            },
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 960,
+              "Start_DateTime": "2026-10-28 16:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-21 22:00:00",
+              "End_DateTime": "2026-10-22 01:00:00"
+            }
+          ],
+          "thursday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-22 01:00:00",
+              "End_DateTime": "2026-10-22 12:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-22 12:00:00",
+              "End_DateTime": "2026-10-22 16:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 960,
+              "Start_DateTime": "2026-10-22 16:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1260,
+              "Start_DateTime": "2026-10-22 21:00:00"
+            }
+          ],
+          "friday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-23 01:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 750,
+              "Start_DateTime": "2026-10-23 12:30:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1140,
+              "Start_DateTime": "2026-10-23 19:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-23 22:00:00"
+            }
+          ],
+          "saturday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-24 01:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 720,
+              "Start_DateTime": "2026-10-24 12:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 840,
+              "Start_DateTime": "2026-10-24 14:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1230,
+              "Start_DateTime": "2026-10-24 20:30:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-24 22:00:00"
+            }
+          ],
+          "sunday": [
+            {
+              "value": {
+                "status": "ON"
+              },
+              "start": 60,
+              "Start_DateTime": "2026-10-25 01:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1200,
+              "Start_DateTime": "2026-10-25 20:00:00"
+            },
+            {
+              "value": {
+                "status": "OFF"
+              },
+              "start": 1320,
+              "Start_DateTime": "2026-10-25 22:00:00"
+            }
+          ]
+        },
+        "boost": null,
+        "status": "OFF"
+      }
+    }
+  },
+  "devices": {
+    "id-2": {
+      "id": "id-2",
+      "type": "hub",
+      "sortOrder": 0,
+      "created": 1693696973536,
+      "lastSeen": 1792618005376,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "model": "NANO2",
+        "version": "1.0.0-7054-PULSAR47",
+        "manufacturer": "AlertMe",
+        "hardwareIdentifier": "HW-0000",
+        "upgrade": {
+          "available": false,
+          "version": "1.0.0-7054-PULSAR47",
+          "upgrading": false
+        },
+        "power": "mains",
+        "uptime": 1108800,
+        "operation": "DEPLOYED",
+        "ipAddress": "<redacted>",
+        "macAddress": "<redacted>",
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "REBOOT_HUB",
+          "MIMIC_MODE",
+          "ActionsDaylight",
+          "ActionsMultiOutput",
+          "SLT5_INSTALL",
+          "ACTIONS_2",
+          "INSTALL_PHILIPS_HUE",
+          "PRODUCT_GROUP",
+          "HOMEKIT"
+        ],
+        "pmz": "OK",
+        "connection": "wired",
+        "mimicMode": {
+          "enabled": false,
+          "firstTime": true,
+          "start": "18:00",
+          "end": "22:30",
+          "consumers": []
+        },
+        "assistedLiving": {
+          "noMorningActivity": false,
+          "noRecentActivity": false,
+          "nightTime": false,
+          "learning": true
+        },
+        "homeKit": {
+          "status": "ENABLED",
+          "paired": false
+        }
+      },
+      "state": {
+        "name": "Hub",
+        "homeKitEnabled": true,
+        "homeKitPaired": false,
+        "discovery": false
+      }
+    },
+    "id-8": {
+      "id": "id-8",
+      "type": "boilermodule",
+      "sortOrder": 1,
+      "created": 1694299363331,
+      "lastSeen": 1730754860353,
+      "parent": "id-2",
+      "props": {
+        "online": false,
+        "presenceLastChanged": 1730755220416,
+        "model": "SLR1",
+        "version": "00000000",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "power": "mains",
+        "signal": 100,
+        "zone": "id-8",
+        "tui": "id-19",
+        "modelVariant": "SLR1c",
+        "capabilities": [
+          "INFORMATION"
+        ],
+        "reset": false,
+        "initialisedStatus": "NOT_INITIALISED"
+      },
+      "state": {
+        "name": "Downstairs"
+      }
+    },
+    "id-19": {
+      "id": "id-19",
+      "type": "thermostatui",
+      "sortOrder": 1,
+      "created": 1698268262393,
+      "lastSeen": 1731947302792,
+      "parent": "id-2",
+      "props": {
+        "online": false,
+        "presenceLastChanged": 1731947962880,
+        "model": "SLT6",
+        "version": "01130203",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 100,
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION"
+        ],
+        "modelVariant": "SLT6",
+        "zone": "id-8"
+      },
+      "state": {
+        "name": "Downstairs"
+      }
+    },
+    "id-20": {
+      "id": "id-20",
+      "type": "thermostatui",
+      "sortOrder": 1,
+      "created": 1694298011640,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508393107,
+        "model": "SLT6",
+        "version": "01130203",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 40,
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "OPTIMUM_START"
+        ],
+        "modelVariant": "SLT6",
+        "zone": "id-12"
+      },
+      "state": {
+        "name": "Main Hall",
+        "zoneName": "Main Hall"
+      }
+    },
+    "id-12": {
+      "id": "id-12",
+      "type": "boilermodule",
+      "sortOrder": 1,
+      "created": 1694298039392,
+      "lastSeen": 1694298771863,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508316407,
+        "model": "SLR1",
+        "version": "00136620",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "power": "mains",
+        "signal": 100,
+        "zone": "id-12",
+        "tui": "id-20",
+        "modelVariant": "SLR1c",
+        "capabilities": [
+          "INFORMATION"
+        ],
+        "reset": false,
+        "initialisedStatus": "INITIALISED"
+      },
+      "state": {
+        "name": "Main Hall",
+        "zoneName": "Main Hall"
+      }
+    },
+    "id-4": {
+      "id": "id-4",
+      "type": "boilermodule",
+      "sortOrder": 1,
+      "created": 1694298636693,
+      "lastSeen": 1694298800872,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508340635,
+        "model": "SLR1",
+        "version": "00136620",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "power": "mains",
+        "signal": 100,
+        "zone": "id-4",
+        "tui": "id-21",
+        "modelVariant": "SLR1c",
+        "capabilities": [
+          "INFORMATION",
+          "FAST_HEAT"
+        ],
+        "reset": false,
+        "initialisedStatus": "INITIALISED"
+      },
+      "state": {
+        "name": "Upstairs",
+        "zoneName": "Upstairs"
+      }
+    },
+    "id-21": {
+      "id": "id-21",
+      "type": "thermostatui",
+      "sortOrder": 1,
+      "created": 1694298659510,
+      "lastSeen": 1695498122989,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508357514,
+        "model": "SLT6",
+        "version": "01130203",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 40,
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "OPTIMUM_START"
+        ],
+        "modelVariant": "SLT6",
+        "zone": "id-4"
+      },
+      "state": {
+        "name": "Upstairs",
+        "zoneName": "Upstairs"
+      }
+    },
+    "id-3": {
+      "id": "id-3",
+      "type": "trv",
+      "sortOrder": 1,
+      "created": 1710456727458,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508381469,
+        "model": "TRV003",
+        "version": "0000023A",
+        "manufacturer": "Danfoss",
+        "upgrade": {
+          "available": false,
+          "version": "0000023A",
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 20,
+        "eui64": "0000000000000001",
+        "calibration": {
+          "start": "2024-03-14T23:11:09.686+00:00",
+          "end": "2024-03-14T23:21:09.307+00:00",
+          "failureReason": "CANCELED",
+          "errorStates": []
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "DELETE",
+          "TRV_CALIBRATION"
+        ]
+      },
+      "state": {
+        "name": "Creche",
+        "control": "id-1",
+        "zone": "id-4",
+        "zoneName": "Upstairs",
+        "childLock": false,
+        "mountingMode": "VERTICAL",
+        "mountingModeActive": false,
+        "viewingAngle": "ANGLE_180",
+        "calibrationStatus": "CALIBRATED"
+      }
+    },
+    "id-14": {
+      "id": "id-14",
+      "type": "trv",
+      "sortOrder": 1,
+      "created": 1710457060782,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508472423,
+        "model": "TRV003",
+        "version": "0000023A",
+        "manufacturer": "Danfoss",
+        "upgrade": {
+          "available": false,
+          "version": "0000023A",
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 20,
+        "eui64": "0000000000000002",
+        "calibration": {
+          "start": "2024-03-14T23:11:07.898+00:00",
+          "end": "2024-03-14T23:21:07.884+00:00",
+          "failureReason": "CANCELED",
+          "errorStates": []
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "DELETE",
+          "TRV_CALIBRATION"
+        ]
+      },
+      "state": {
+        "name": "Oak Room",
+        "control": "id-13",
+        "zone": "id-4",
+        "zoneName": "Upstairs",
+        "childLock": false,
+        "mountingMode": "VERTICAL",
+        "mountingModeActive": false,
+        "viewingAngle": "ANGLE_180",
+        "calibrationStatus": "CALIBRATED"
+      }
+    },
+    "id-6": {
+      "id": "id-6",
+      "type": "trv",
+      "sortOrder": 1,
+      "created": 1710457328760,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508421992,
+        "model": "TRV003",
+        "version": "0000023A",
+        "manufacturer": "Danfoss",
+        "upgrade": {
+          "available": false,
+          "version": "0000023A",
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 100,
+        "eui64": "0000000000000003",
+        "calibration": {
+          "start": "2024-03-14T23:12:06.319+00:00",
+          "end": "2024-03-14T23:22:06.332+00:00",
+          "failureReason": "CANCELED",
+          "errorStates": []
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "DELETE",
+          "TRV_CALIBRATION"
+        ]
+      },
+      "state": {
+        "name": "Office A",
+        "control": "id-5",
+        "zone": "id-4",
+        "zoneName": "Upstairs",
+        "childLock": false,
+        "mountingMode": "VERTICAL",
+        "mountingModeActive": false,
+        "viewingAngle": "ANGLE_180",
+        "calibrationStatus": "CALIBRATED"
+      }
+    },
+    "id-10": {
+      "id": "id-10",
+      "type": "trv",
+      "sortOrder": 1,
+      "created": 1710457601716,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508401224,
+        "model": "TRV003",
+        "version": "0000023A",
+        "manufacturer": "Danfoss",
+        "upgrade": {
+          "available": false,
+          "version": "0000023A",
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 100,
+        "eui64": "0000000000000004",
+        "calibration": {
+          "start": "2024-03-14T23:11:09.438+00:00",
+          "end": "2024-03-15T11:22:56.089+00:00",
+          "failureReason": "CANCELED",
+          "errorStates": []
+        },
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "DELETE",
+          "TRV_CALIBRATION"
+        ]
+      },
+      "state": {
+        "name": "Office B",
+        "control": "id-9",
+        "zone": "id-4",
+        "zoneName": "Upstairs",
+        "childLock": false,
+        "mountingMode": "VERTICAL",
+        "mountingModeActive": false,
+        "viewingAngle": "ANGLE_180",
+        "calibrationStatus": "CALIBRATED"
+      }
+    },
+    "id-17": {
+      "id": "id-17",
+      "type": "boilermodule",
+      "sortOrder": 1,
+      "created": 1730755864060,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508337741,
+        "model": "SLR2",
+        "version": "03025700",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "upgrading": false
+        },
+        "power": "mains",
+        "signal": 100,
+        "zone": "id-17",
+        "tui": "id-22",
+        "modelVariant": "SLR2b",
+        "capabilities": [
+          "INFORMATION"
+        ],
+        "reset": false,
+        "initialisedStatus": "INITIALISED"
+      },
+      "state": {
+        "name": "Zone 1",
+        "zoneName": "Zone 1"
+      }
+    },
+    "id-22": {
+      "id": "id-22",
+      "type": "thermostatui",
+      "sortOrder": 1,
+      "created": 1730756160015,
+      "parent": "id-2",
+      "props": {
+        "online": true,
+        "presenceLastChanged": 1791508347308,
+        "model": "SLT3",
+        "version": "05110213",
+        "manufacturer": "Computime",
+        "upgrade": {
+          "available": false,
+          "version": "05110213",
+          "progress": 0,
+          "upgrading": false,
+          "status": "COMPLETE"
+        },
+        "power": "battery",
+        "signal": 100,
+        "battery": 20,
+        "capabilities": [
+          "INFORMATION",
+          "RENAME",
+          "HEATING_ALERTS",
+          "GEOLOCATION",
+          "HOLIDAY_MODE",
+          "OPTIMUM_START"
+        ],
+        "modelVariant": "SLT3b",
+        "zone": "id-17"
+      },
+      "state": {
+        "name": "Thermostat 3",
+        "zoneName": "Zone 1"
+      }
+    }
+  },
+  "deviceList": {
+    "parent": [
+      {
+        "hiveID": "id-2",
+        "hiveName": "Hub",
+        "hiveType": "Connectivity",
+        "haType": "binary_sensor",
+        "deviceData": {
+          "online": true,
+          "model": "NANO2",
+          "version": "1.0.0-7054-PULSAR47",
+          "manufacturer": "AlertMe",
+          "hardwareIdentifier": "HW-0000",
+          "upgrade": {
+            "available": false,
+            "version": "1.0.0-7054-PULSAR47",
+            "upgrading": false
+          },
+          "power": "mains",
+          "uptime": 1108800,
+          "operation": "DEPLOYED",
+          "ipAddress": "<redacted>",
+          "macAddress": "<redacted>",
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "REBOOT_HUB",
+            "MIMIC_MODE",
+            "ActionsDaylight",
+            "ActionsMultiOutput",
+            "SLT5_INSTALL",
+            "ACTIONS_2",
+            "INSTALL_PHILIPS_HUE",
+            "PRODUCT_GROUP",
+            "HOMEKIT"
+          ],
+          "pmz": "OK",
+          "connection": "wired",
+          "mimicMode": {
+            "enabled": false,
+            "firstTime": true,
+            "start": "18:00",
+            "end": "22:30",
+            "consumers": []
+          },
+          "assistedLiving": {
+            "noMorningActivity": false,
+            "noRecentActivity": false,
+            "nightTime": false,
+            "learning": true
+          },
+          "homeKit": {
+            "status": "ENABLED",
+            "paired": false
+          }
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-2",
+        "device_name": "Hub",
+        "haName": "Hive Hub Status",
+        "category": "diagnostic"
+      }
+    ],
+    "alarm_control_panel": [],
+    "binary_sensor": [
+      {
+        "hiveID": "id-2",
+        "hiveName": "Hub",
+        "hiveType": "Connectivity",
+        "haType": "binary_sensor",
+        "deviceData": {
+          "online": true,
+          "model": "NANO2",
+          "version": "1.0.0-7054-PULSAR47",
+          "manufacturer": "AlertMe",
+          "hardwareIdentifier": "HW-0000",
+          "upgrade": {
+            "available": false,
+            "version": "1.0.0-7054-PULSAR47",
+            "upgrading": false
+          },
+          "power": "mains",
+          "uptime": 1108800,
+          "operation": "DEPLOYED",
+          "ipAddress": "<redacted>",
+          "macAddress": "<redacted>",
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "REBOOT_HUB",
+            "MIMIC_MODE",
+            "ActionsDaylight",
+            "ActionsMultiOutput",
+            "SLT5_INSTALL",
+            "ACTIONS_2",
+            "INSTALL_PHILIPS_HUE",
+            "PRODUCT_GROUP",
+            "HOMEKIT"
+          ],
+          "pmz": "OK",
+          "connection": "wired",
+          "mimicMode": {
+            "enabled": false,
+            "firstTime": true,
+            "start": "18:00",
+            "end": "22:30",
+            "consumers": []
+          },
+          "assistedLiving": {
+            "noMorningActivity": false,
+            "noRecentActivity": false,
+            "nightTime": false,
+            "learning": true
+          },
+          "homeKit": {
+            "status": "ENABLED",
+            "paired": false
+          }
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-2",
+        "device_name": "Hub",
+        "haName": "Hive Hub Status",
+        "category": "diagnostic"
+      }
+    ],
+    "camera": [],
+    "climate": [
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "trvcontrol",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "trvcontrol",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "trvcontrol",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "heating",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "trvcontrol",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "heating",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs",
+        "temperatureunit": "C"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "heating",
+        "haType": "climate",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3",
+        "temperatureunit": "C"
+      }
+    ],
+    "light": [],
+    "sensor": [
+      {
+        "hiveID": "id-19",
+        "hiveName": "Downstairs",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": false,
+          "presenceLastChanged": 1731947962880,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-8"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-19",
+        "device_name": "Downstairs",
+        "haName": "Downstairs Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-19",
+        "hiveName": "Downstairs",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": false,
+          "presenceLastChanged": 1731947962880,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-8"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-19",
+        "device_name": "Downstairs",
+        "haName": "Downstairs Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-20",
+        "hiveName": "Main Hall",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-20",
+        "hiveName": "Main Hall",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-21",
+        "hiveName": "Upstairs",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-21",
+        "hiveName": "Upstairs",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-3",
+        "hiveName": "Creche",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-3",
+        "hiveName": "Creche",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-14",
+        "hiveName": "Oak Room",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-14",
+        "hiveName": "Oak Room",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-6",
+        "hiveName": "Office A",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-6",
+        "hiveName": "Office A",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-10",
+        "hiveName": "Office B",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-10",
+        "hiveName": "Office B",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-22",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Battery",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Battery Level",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-22",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Availability",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Availability",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-1",
+        "hiveName": "Creche",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508381469,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000001",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.686+00:00",
+            "end": "2024-03-14T23:21:09.307+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-3",
+        "device_name": "Creche",
+        "haName": "Creche Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-5",
+        "hiveName": "Office A",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508421992,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000003",
+          "calibration": {
+            "start": "2024-03-14T23:12:06.319+00:00",
+            "end": "2024-03-14T23:22:06.332+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-6",
+        "device_name": "Office A",
+        "haName": "Office A Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-9",
+        "hiveName": "Office B",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508401224,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 100,
+          "eui64": "0000000000000004",
+          "calibration": {
+            "start": "2024-03-14T23:11:09.438+00:00",
+            "end": "2024-03-15T11:22:56.089+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-10",
+        "device_name": "Office B",
+        "haName": "Office B Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-13",
+        "hiveName": "Oak Room",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508472423,
+          "model": "TRV003",
+          "version": "0000023A",
+          "manufacturer": "Danfoss",
+          "upgrade": {
+            "available": false,
+            "version": "0000023A",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "eui64": "0000000000000002",
+          "calibration": {
+            "start": "2024-03-14T23:11:07.898+00:00",
+            "end": "2024-03-14T23:21:07.884+00:00",
+            "failureReason": "CANCELED",
+            "errorStates": []
+          },
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "DELETE",
+            "TRV_CALIBRATION"
+          ]
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-14",
+        "device_name": "Oak Room",
+        "haName": "Oak Room Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_Current_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Current Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_Target_Temperature",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Target Temperature",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Boost",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-18",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Hotwater_State",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Hotwater State",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-18",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Hotwater_Mode",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Hotwater Mode",
+        "category": "diagnostic"
+      },
+      {
+        "hiveID": "id-18",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Hotwater_Boost",
+        "haType": "sensor",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Hotwater Boost",
+        "category": "diagnostic"
+      }
+    ],
+    "switch": [
+      {
+        "hiveID": "id-11",
+        "hiveName": "Main Hall",
+        "hiveType": "Heating_Heat_On_Demand",
+        "haType": "switch",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508393107,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-12"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-20",
+        "device_name": "Main Hall",
+        "haName": "Main Hall Heat on Demand",
+        "category": "config"
+      },
+      {
+        "hiveID": "id-15",
+        "hiveName": "Upstairs",
+        "hiveType": "Heating_Heat_On_Demand",
+        "haType": "switch",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508357514,
+          "model": "SLT6",
+          "version": "01130203",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 40,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT6",
+          "zone": "id-4"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-21",
+        "device_name": "Upstairs",
+        "haName": "Upstairs Heat on Demand",
+        "category": "config"
+      },
+      {
+        "hiveID": "id-16",
+        "hiveName": "Thermostat 3",
+        "hiveType": "Heating_Heat_On_Demand",
+        "haType": "switch",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3 Heat on Demand",
+        "category": "config"
+      }
+    ],
+    "water_heater": [
+      {
+        "hiveID": "id-18",
+        "hiveName": "Thermostat 3",
+        "hiveType": "hotwater",
+        "haType": "water_heater",
+        "deviceData": {
+          "online": true,
+          "presenceLastChanged": 1791508347308,
+          "model": "SLT3",
+          "version": "05110213",
+          "manufacturer": "Computime",
+          "upgrade": {
+            "available": false,
+            "version": "05110213",
+            "progress": 0,
+            "upgrading": false,
+            "status": "COMPLETE"
+          },
+          "power": "battery",
+          "signal": 100,
+          "battery": 20,
+          "capabilities": [
+            "INFORMATION",
+            "RENAME",
+            "HEATING_ALERTS",
+            "GEOLOCATION",
+            "HOLIDAY_MODE",
+            "OPTIMUM_START"
+          ],
+          "modelVariant": "SLT3b",
+          "zone": "id-17"
+        },
+        "parentDevice": "id-2",
+        "isGroup": false,
+        "device_id": "id-22",
+        "device_name": "Thermostat 3",
+        "haName": "Thermostat 3"
+      }
+    ]
+  }
+}
