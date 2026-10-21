@@ -1,6 +1,6 @@
 """Interpret raw Hive JSON into typed readings. Pure functions, no I/O.
 
-Raw shapes (from the spike, PLAN.md §1a):
+Raw shapes (from the sign-in spike and live runs):
 - products: "heating" (boiler zone; parent = boiler module, whose props.tui is the
   thermostat), "trvcontrol" (TRV zone; props.trvs lists its TRVs), "hotwater".
   A product Hive can't describe carries "error" and almost no state.

@@ -2,7 +2,7 @@
 
 Two library bugs in pyhive-integration 1.0.10 are worked around in ManagedHive:
 
-1. Session.login() (spike phase D, PLAN.md §1a) asks Cognito whether the device
+1. Session.login() (found in the sign-in spike) asks Cognito whether the device
    is "remembered" using an access token a fresh process does not have, and
    gives up with HiveInvalidDeviceAuthentication. Overridden with a plain
    device-SRP flow.
