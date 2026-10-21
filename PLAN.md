@@ -1,6 +1,6 @@
 # Hive MCP server: plan and status
 
-*Last updated 21/10/2026. Read-only prototype finished and working live.*
+*Last updated 21/10/2026. Read-only server finished, polished and in use from Claude Code and Claude Desktop. Next: write tools (§6), only when the user says go.*
 
 A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later control, a Hive Active Heating system. It's built on the unofficial `pyhive-integration` library, which can break without notice. UK conventions throughout: °C, DD/MM/YYYY, 24-hour, British English.
 
@@ -13,7 +13,6 @@ A local MCP server (Python, FastMCP, stdio) that lets Claude read, and later con
 | Claude Code registration | ✅ Project scope (`.mcp.json`, gitignored; `.mcp.json.example` is committed), approved via `.claude/settings.local.json`. Used from a fresh session 21/10/2026. |
 | Tests | ✅ 89 tests (`uv run pytest`), `ruff`, `mypy --strict`. |
 | Claude Desktop registration | ✅ `mcpServers.hive` added to `claude_desktop_config.json` 21/10/2026 (backup alongside it). Checked in the app after a restart. |
-| Full weekly schedule tool | ⏳ Not done (the raw data is already in each snapshot). |
 | Write tools | ⏳ Not started. Must stay behind `HIVE_MCP_ALLOW_WRITES` (§6). |
 | Version control | ✅ git, `main`, remote `github.com/stevehaskew/hivehome-mcp` (public). |
 
@@ -26,8 +25,10 @@ src/hive_mcp/
   __main__.py      CLI: serve | login | logout | status | show
   server.py        FastMCP app; read-only tools; turns known failures into ToolErrors
   views.py         Tool outputs: numbers + UK-formatted times + one-sentence summaries
+                   ("tomorrow 02:00" in sentences, full DD/MM/YYYY in fields)
   readings.py      Pure functions: raw Hive JSON -> typed readings (names, availability,
-                   batteries, modes, boost, schedule now/next/later, DST-safe)
+                   batteries, modes, boost, schedule now/next/later and full
+                   week, repeats merged, DST-safe)
   models.py        Pydantic reading models (values, aware datetimes)
   snapshot.py      HiveSnapshot (raw products/devices + fetched_at + stale) and LONDON tz
   hive_client.py   HiveClient Protocol, LiveHiveClient (lazy sign-in, cache, stale fallback),
@@ -90,13 +91,16 @@ Tool outputs (`views.py`) always carry `as_of` (UK time) and `stale` (true when 
 1. ✅ **Use it from a fresh Claude Code session** (21/10/2026). The tools load and the answers are correct. Wording to fix (see step 4).
 2. ✅ **Version control.** First commit pushed to `github.com/stevehaskew/hivehome-mcp` (public), so keep checking for personal data before every push.
 3. ✅ **Claude Desktop registration.** Added the same command to `~/Library/Application Support/Claude/claude_desktop_config.json` under `mcpServers.hive`. Checked in the app after a restart.
-4. **Small polish:**
+4. ✅ **Small polish** (all done 21/10/2026):
    - ✅ (21/10/2026) Expected `ToolError`s are logged below ERROR (unknown zone and sign-in at INFO, Hive unreachable at WARNING), so they stay off stderr.
    - ✅ (21/10/2026) `readings.now_next_later` merges back-to-back slots with the same value, round the week, so now/next/later are real changes. Main Hall's "now" slot can therefore start days ago.
    - ✅ (21/10/2026) Summaries use `views.uk_when`: "22:00", "tomorrow 02:00", "yesterday 21:30", "Fri 09:00" within the coming week, otherwise the full date. The structured `starts`/`ends`/`as_of` fields keep full DD/MM/YYYY dates.
    - ✅ (21/10/2026) `min_temp_c`/`max_temp_c` are gone (they were constants, not read from Hive; the write tools will have their own limits, §6). `controller` is only given when it isn't the zone's own thermostat, i.e. for hot water.
    - ✅ (21/10/2026) `get_schedule(zone)` returns the full weekly schedule for a heating zone or the hot water (`readings.week_days`). Each day runs midnight to midnight, opening with the setting carried over from the day before, with repeats merged. It also says whether the schedule is in use (`in_force`); OFF zones still have a stored schedule.
-5. **Write tools (phase 2).** See §6.
+5. **Write tools (phase 2).** See §6. **Don't start until the user says so.** Before writing code:
+   - Read the library's setters in `.venv/lib/python3.12/site-packages/apyhiveapi/` (`heating.py`, `hotwater.py`, `trv`) for the exact `setState` kwargs, especially boost off and the hot water modes, and whether TRV zones (`trvcontrol`) take the same kwargs as boiler zones.
+   - Agree the open design points with the user: the 5–25°C and 15–120 minute limits, whether OFF/MANUAL changes need any extra confirmation, and the shape of the audit log.
+   - Testing a live write needs the user's say-so each time, as it changes a real building's heating. Prefer a zone nobody is using (Thermostat 3 is OFF), and put it back afterwards.
 6. **Upstream:** report the two library bugs (§2) to `Pyhass/Pyhive` after checking 2.0.0b4. Ask the user before posting anything publicly.
 
 ## 6. Phase 2: write tools (design notes, not built)
