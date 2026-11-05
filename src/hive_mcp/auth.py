@@ -90,7 +90,9 @@ async def interactive_login(
         )
 
     await auth.device_registration(device_name)
-    group_key, key, device_password = await auth.get_device_data()
+    # 2.0 returns (group_key, key, password, token_created). The timestamp isn't
+    # kept: without it the session refreshes once at start, which is harmless.
+    group_key, key, device_password, *_ = await auth.get_device_data()
     _LOGGER.info("Registered device %r (key …%s).", device_name, key[-6:])
     return LoginOutcome(
         tokens=Tokens.from_auth_result(result),

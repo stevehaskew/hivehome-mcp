@@ -78,6 +78,16 @@ async def test_interactive_login_with_sms(fake_auth: type[FakeAuth]) -> None:
     assert outcome.tokens.accessToken == "access-sms"
 
 
+async def test_fake_auth_device_data_matches_the_library() -> None:
+    """FakeAuth.get_device_data must return what the real Auth does (no network needed)."""
+    from hive_mcp._hivelib import Auth
+
+    real = await Auth("me@example.com", "pw", *DEVICE).get_device_data()
+    fake = await FakeAuth().get_device_data()
+    assert len(fake) == len(real)
+    assert tuple(real[:3]) == tuple(DEVICE)
+
+
 async def test_interactive_login_without_device_keys(
     fake_auth: type[FakeAuth], monkeypatch: pytest.MonkeyPatch
 ) -> None:

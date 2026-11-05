@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from datetime import datetime
 from typing import Any
 
 import keyring
@@ -84,8 +85,9 @@ class FakeAuth:
     async def device_registration(self, name: str) -> None:
         self.registered_as = name
 
-    async def get_device_data(self) -> tuple[str, str, str]:
-        return ("group", self.device_key or "", "device-secret")
+    async def get_device_data(self) -> tuple[str, str, str, datetime | None]:
+        """Same shape as 2.0's: the fourth value is when the tokens were issued."""
+        return ("group", self.device_key or "", "device-secret", datetime(2026, 11, 5, 21, 0))
 
 
 @pytest.fixture
