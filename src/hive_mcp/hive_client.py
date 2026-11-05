@@ -37,7 +37,7 @@ class HiveClient(Protocol):
     async def write(
         self, product_type: str, product_id: str, kwargs: dict[str, Any]
     ) -> HiveSnapshot:
-        """Send one setState, then return a freshly fetched snapshot."""
+        """Send one set_state, then return a freshly fetched snapshot."""
         ...
 
     async def close(self) -> None: ...
@@ -89,13 +89,13 @@ class LiveHiveClient:
         """Fetch from Hive (the caller holds the lock), falling back to the last reading."""
         last = self._last
         try:
-            ok = await hive.getDevices("No_ID")
+            ok = await hive.get_devices("No_ID")
         except hive_exceptions.HiveReauthRequired as err:
             raise ReauthRequired(str(err) or "Hive needs you to sign in again.") from err
         if ok:
             self._last = self._capture(hive)
             return self._last
-        # getDevices() logs and swallows network/API errors, keeping its old data.
+        # get_devices() logs and swallows network/API errors, keeping its old data.
         _LOGGER.warning("Hive refresh failed; serving the last good reading.")
         if last is None:
             raise HiveUnavailable("Couldn't reach Hive.")
@@ -107,8 +107,8 @@ class LiveHiveClient:
         async with self._lock:
             hive = await self._ensure_started()
             try:
-                await hive.hiveRefreshTokens()
-                resp = await hive.api.setState(product_type, product_id, **kwargs)
+                await hive.hive_refresh_tokens()
+                resp = await hive.api.set_state(product_type, product_id, **kwargs)
             except (hive_exceptions.HiveReauthRequired, hive_exceptions.HiveAuthError) as err:
                 raise ReauthRequired(str(err) or "Hive needs you to sign in again.") from err
             except Exception as err:  # the library raises bare HTTPError, KeyError and others

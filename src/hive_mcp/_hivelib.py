@@ -1,8 +1,9 @@
 """The only place that imports apyhiveapi.
 
-Importing apyhiveapi.hive replaces sys.excepthook with a handler that logs the
-crashing frame's local variables (which can include the Hive password), so the
-original hook is put back straight away.
+pyhive-integration 1.0.x replaced sys.excepthook on import with a handler that
+logged the crashing frame's local variables (which can include the Hive
+password). 2.0 no longer does, but the original hook is still put back straight
+away in case a later release brings it back.
 """
 
 import sys
