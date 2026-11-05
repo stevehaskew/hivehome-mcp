@@ -62,7 +62,7 @@ class _Api:
         self.calls: list[tuple[str, str, dict[str, Any]]] = []
         self.result: dict[str, Any] | BaseException = {"original": 200, "parsed": {}}
 
-    async def setState(self, n_type: str, n_id: str, **kwargs: Any) -> dict[str, Any]:  # noqa: N802
+    async def set_state(self, n_type: str, n_id: str, **kwargs: Any) -> dict[str, Any]:
         self.calls.append((n_type, n_id, kwargs))
         if isinstance(self.result, BaseException):
             raise self.result
@@ -85,7 +85,7 @@ class StubHive:
         self.token_checks = 0
         StubHive.instances.append(self)
 
-    async def hiveRefreshTokens(self) -> None:  # noqa: N802
+    async def hive_refresh_tokens(self) -> None:
         self.token_checks += 1
 
     async def start(self) -> dict[str, Any]:
@@ -93,7 +93,7 @@ class StubHive:
             raise StubHive.start_error
         return {}
 
-    async def getDevices(self, _n_id: str) -> bool:  # noqa: N802
+    async def get_devices(self, _n_id: str) -> bool:
         self.refreshes += 1
         if isinstance(self.refresh_result, BaseException):
             raise self.refresh_result

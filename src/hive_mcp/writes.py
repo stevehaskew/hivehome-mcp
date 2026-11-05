@@ -1,10 +1,10 @@
-"""Plan writes to Hive: safety limits, mode rules and the setState kwargs. Pure, no I/O.
+"""Plan writes to Hive: safety limits, mode rules and the set_state kwargs. Pure, no I/O.
 
 Each plan_* function checks a request against the current snapshot and returns a
 WritePlan (what to send and what to expect afterwards), None when nothing needs
 sending, or raises WriteRejected with a reason Claude can relay.
 
-setState kwargs, from apyhiveapi 1.0.10 (heating.py, hotwater.py; TRV zones take
+set_state kwargs, from apyhiveapi (devices/heating.py, devices/hotwater.py; TRV zones take
 the same as boiler zones, under their own product type):
 - target:            target=°C
 - heating mode:      mode=SCHEDULE|MANUAL|OFF (we send MANUAL with target=°C)
@@ -93,7 +93,7 @@ def _c(value: float | None) -> str:
 
 
 def _hive_number(value: float) -> int | float:
-    """21.0 -> 21: setState sends str(value), and Hive's own app sends whole numbers."""
+    """21.0 -> 21: Hive's own app sends whole numbers."""
     return int(value) if value.is_integer() else value
 
 

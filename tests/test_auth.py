@@ -78,6 +78,16 @@ async def test_interactive_login_with_sms(fake_auth: type[FakeAuth]) -> None:
     assert outcome.tokens.accessToken == "access-sms"
 
 
+async def test_fake_auth_device_data_matches_the_library() -> None:
+    """FakeAuth.get_device_data must return what the real Auth does (no network needed)."""
+    from hive_mcp._hivelib import Auth
+
+    real = await Auth("me@example.com", "pw", *DEVICE).get_device_data()
+    fake = await FakeAuth().get_device_data()
+    assert len(fake) == len(real)
+    assert tuple(real[:3]) == tuple(DEVICE)
+
+
 async def test_interactive_login_without_device_keys(
     fake_auth: type[FakeAuth], monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -101,7 +111,7 @@ async def test_login_override_updates_and_persists_tokens(fake_auth: type[FakeAu
     hive = ManagedHive(creds(), on_new_tokens=saved.append)
     result = await hive.login()
     assert result == auth_result("relogin")
-    assert hive.tokens.tokenData["refreshToken"] == "refresh-relogin"
+    assert hive.tokens.token_data["refreshToken"] == "refresh-relogin"
     assert hive.relogin_count == 1
     assert [t.refreshToken for t in saved] == ["refresh-relogin"]
 
@@ -109,17 +119,40 @@ async def test_login_override_updates_and_persists_tokens(fake_auth: type[FakeAu
 async def test_loading_stored_tokens_does_not_persist(fake_auth: type[FakeAuth]) -> None:
     saved: list[Tokens] = []
     hive = ManagedHive(creds(), on_new_tokens=saved.append)
-    await hive.updateTokens(STORED.as_session_config(), False)
+    await hive.update_tokens(STORED.as_session_config(), False)
     assert saved == []
 
 
 async def test_access_token_refresh_does_not_persist(fake_auth: type[FakeAuth]) -> None:
     saved: list[Tokens] = []
     hive = ManagedHive(creds(), on_new_tokens=saved.append)
-    await hive.updateTokens(STORED.as_session_config(), False)
-    await hive.updateTokens(auth_result("hourly", refresh=False))
-    assert hive.tokens.tokenData["accessToken"] == "access-hourly"
+    await hive.update_tokens(STORED.as_session_config(), False)
+    await hive.update_tokens(auth_result("hourly", refresh=False))
+    assert hive.tokens.token_data["accessToken"] == "access-hourly"
     assert saved == []
+
+
+@pytest.mark.parametrize(
+    ("owner", "names"),
+    [
+        # Overridden by ManagedHive: the library must still call these by name.
+        ("Hive", ["login", "update_tokens", "_retry_login"]),
+        # Called by ManagedHive and LiveHiveClient (whose tests use stubs).
+        ("Hive", ["start_session", "get_devices", "hive_refresh_tokens", "close"]),
+        ("API", ["set_state"]),
+    ],
+)
+def test_library_still_has_the_methods_we_rely_on(owner: str, names: list[str]) -> None:
+    """Catches a library rename that the stubbed client tests can't see."""
+    import apyhiveapi
+
+    cls = getattr(apyhiveapi, owner)
+    assert [n for n in names if not callable(getattr(cls, n, None))] == []
+
+
+def test_session_tokens_shape() -> None:
+    hive = ManagedHive(creds())
+    assert isinstance(hive.tokens.token_data, dict)
 
 
 async def test_login_override_maps_reauth(fake_auth: type[FakeAuth]) -> None:
@@ -147,20 +180,20 @@ class _ExpiringRefreshAuth:
 async def test_expired_refresh_token_recovers_through_library_fallback(
     fake_auth: type[FakeAuth],
 ) -> None:
-    """Library refresh -> _retryLogin -> our login(), without the lock deadlock."""
+    """Library refresh -> _retry_login -> our login(), without a lock deadlock."""
     saved: list[Tokens] = []
     hive = ManagedHive(creds(), on_new_tokens=saved.append)
-    await hive.updateTokens(STORED.as_session_config(), False)
-    hive.tokens.tokenCreated = datetime.min
+    await hive.update_tokens(STORED.as_session_config(), False)
+    hive.tokens.token_created = datetime.min
     session_auth = _ExpiringRefreshAuth()
     hive.auth = session_auth
 
-    # The unpatched library deadlocks here, so fail fast rather than hang.
-    await asyncio.wait_for(hive.hiveRefreshTokens(), timeout=5)
+    # 1.0.10 deadlocked here, so fail fast rather than hang if it comes back.
+    await asyncio.wait_for(hive.hive_refresh_tokens(), timeout=5)
 
     assert session_auth.refresh_calls == ["refresh-stored"]
     assert hive.relogin_count == 1
-    assert hive.tokens.tokenData["accessToken"] == "access-relogin"
+    assert hive.tokens.token_data["accessToken"] == "access-relogin"
     assert [t.refreshToken for t in saved] == ["refresh-relogin"]
     await hive.close()
 
@@ -168,6 +201,7 @@ async def test_expired_refresh_token_recovers_through_library_fallback(
 async def test_retry_login_retries_network_errors_then_gives_up(
     fake_auth: type[FakeAuth], monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """The library's own _retry_login() retries our login() three times."""
     calls = 0
 
     async def flaky_login() -> dict[str, Any]:
@@ -179,11 +213,25 @@ async def test_retry_login_retries_network_errors_then_gives_up(
         return None
 
     hive = ManagedHive(creds())
+    hive.auth = _ExpiringRefreshAuth()
     monkeypatch.setattr(hive, "login", flaky_login)
-    monkeypatch.setattr("hive_mcp.auth.asyncio.sleep", no_sleep)
+    monkeypatch.setattr("apyhiveapi.session.auth.asyncio.sleep", no_sleep)
     with pytest.raises(hive_exceptions.HiveReauthRequired):
-        await hive._retryLogin()
+        await hive._retry_login()
     assert calls == 3
+    await hive.close()
+
+
+async def test_retry_login_stops_at_once_when_reauth_is_needed(
+    fake_auth: type[FakeAuth],
+) -> None:
+    """A rejected device (our login() raising HiveReauthRequired) isn't retried."""
+    fake_auth.login_result = {"ChallengeName": "SMS_MFA"}
+    hive = ManagedHive(creds())
+    hive.auth = _ExpiringRefreshAuth()
+    with pytest.raises(hive_exceptions.HiveReauthRequired):
+        await asyncio.wait_for(hive._retry_login(), timeout=2)
+    assert hive.relogin_count == 0
     await hive.close()
 
 

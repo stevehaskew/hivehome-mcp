@@ -74,7 +74,7 @@ claude mcp add hive --scope project -- /opt/homebrew/bin/uv --directory /path/to
 src/hive_mcp/
   __main__.py      CLI: serve | login | logout | status | show
   server.py        FastMCP app: read tools, write tools (only if allowed), known failures -> ToolErrors
-  writes.py        Write planning (no I/O): limits, mode rules, setState kwargs, "did it take?"
+  writes.py        Write planning (no I/O): limits, mode rules, set_state kwargs, "did it take?"
   audit.py         audit.log: one JSON line per write attempt, in its own rotating file
   views.py         Tool outputs: numbers + UK-formatted times + one-sentence summaries
   readings.py      Pure functions: raw Hive JSON -> typed readings (names, availability,
@@ -82,7 +82,7 @@ src/hive_mcp/
   models.py        Pydantic reading models (values, aware datetimes)
   snapshot.py      HiveSnapshot (raw products/devices + fetched_at + stale) and the London time zone
   hive_client.py   HiveClient Protocol; LiveHiveClient (lazy sign-in, cache, stale fallback,
-                   write = setState + forced refresh); make_client(settings)
+                   write = set_state + forced refresh); make_client(settings)
   fake_client.py   FakeHiveClient: serves the fixture, records and applies writes
   auth.py          interactive_login, device_login, forget_device, ManagedHive (library fixes)
   credentials.py   One Keychain item (service "hive-mcp", account "credentials"), env overrides
@@ -93,7 +93,7 @@ scripts/make_fixture.py   Builds the scrubbed test fixture from the spike dump
 spike/login_spike.py      The original sign-in spike, kept for reference (output gitignored)
 ```
 
-**The library is used only to sign in, fetch raw data and send `setState`.** Both clients return a raw `HiveSnapshot`, and `readings.py` interprets it. The library's getters are thin wrappers with side effects, and `getState()` is misleading. The readings were checked against what the library's own getters reported live.
+**The library is used only to sign in, fetch raw data and send `set_state`.** Both clients return a raw `HiveSnapshot`, and `readings.py` interprets it. The library's getters are thin wrappers with side effects, and `getState()` is misleading. The readings were checked against what the library's own getters reported live.
 
 **Other decisions:**
 
@@ -103,16 +103,15 @@ spike/login_spike.py      The original sign-in spike, kept for reference (output
 - **Errors Claude sees** are limited to: sign in again (`uv run hive-mcp login`), couldn't reach Hive, an unknown zone (with the valid names), and a refused or failed write with the reason. Anything else is masked.
 - **Registration uses absolute paths** (`/opt/homebrew/bin/uv --directory …`), so the server starts even when the app is launched from the Dock with a minimal `PATH`.
 
-### Library notes (`pyhive-integration` 1.0.10)
+### Library notes (`pyhive-integration` 2.0.0b5)
 
-- **Pinned to 1.0.10.** 2.0 (in beta, now at [Pyhass/Pyhive](https://github.com/Pyhass/Pyhive)) is a rewrite with a snake_case API. When moving to it, only `_hivelib.py`, `auth.py` and `hive_client.py` should need to change.
-- **Two bugs are worked around in `ManagedHive`:** `Session.login()` can't re-login a fresh process, and `hiveRefreshTokens()` deadlocks once the refresh token expires. Details are in `auth.py` and [issue #4](https://github.com/stevehaskew/hivehome-mcp/issues/4), which is about reporting them upstream.
+- **Pinned to the 2.0.0b5 beta** ([Pyhass/Pyhive](https://github.com/Pyhass/Pyhive)), for the schedule setter it added ([issue #6](https://github.com/stevehaskew/hivehome-mcp/issues/6)). 2.0 is a rewrite with a snake_case API. It keeps camelCase aliases, but **only for outside callers**: the library calls its own snake_case methods, so overrides must use those names. `test_library_still_has_the_methods_we_rely_on` fails if a release renames one, which the stubbed client tests wouldn't notice. Only `_hivelib.py`, `auth.py` and `hive_client.py` touch the library.
+- **`ManagedHive` overrides `login()` and `update_tokens()`:** our own device-SRP re-login, and saving fresh tokens to the Keychain. The two 1.0.10 bugs ([issue #4](https://github.com/stevehaskew/hivehome-mcp/issues/4)) look fixed in 2.0: the refresh deadlock is gone, and its `login()` no longer needs an access token to re-login. Details are in `auth.py`.
 - **Other quirks:**
-  - Importing `apyhiveapi.hive` replaces `sys.excepthook` with one that logs local variables, which could include the password; `_hivelib.py` puts the original back.
-  - `is_device_registered()` returns `False` even for a working device.
-  - The 1.0.10 wheel lacks the file-mode fixtures, which is why there's a `FakeHiveClient`.
-  - About 24 harmless `KeyError 'zone'` warnings per TRV per poll; they're kept off stderr and de-duplicated in the log file.
-- **Writes** call `api.setState(product_type, product_id, **kwargs)` directly: POST `/nodes/{type}/{id}`, with every value sent as a string. The kwargs, taken from the library's own setters, are listed at the top of `writes.py`. TRV zones (`trvcontrol`) take the same kwargs as boiler zones. `setState` raises bare exceptions or returns `{}` on some errors, so `LiveHiveClient.write` treats anything other than HTTP 200 as a failure.
+  - 1.0.x replaced `sys.excepthook` on import with one that logs local variables, which could include the password. 2.0 doesn't, but `_hivelib.py` still puts the original back in case it returns.
+  - `is_device_registered()` returned `False` even for a working device in 1.0.10 (not re-checked on 2.0).
+  - 1.0.10 logged about 24 harmless `KeyError 'zone'` warnings per TRV per poll. 2.0 reads `zone` with `.get()`, so these should be gone. The de-duplication in the log file stays.
+- **Writes** call `api.set_state(product_type, product_id, **kwargs)` directly: POST `/nodes/{type}/{id}` with the kwargs as JSON (1.0.10 sent every value as a string). The kwargs, taken from the library's own setters, are listed at the top of `writes.py`. TRV zones (`trvcontrol`) take the same kwargs as boiler zones. `set_state` raises on some errors and returns `{}` on others, so `LiveHiveClient.write` treats anything other than HTTP 200 as a failure.
 
 ## Development
 

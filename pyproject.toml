@@ -9,7 +9,7 @@ dependencies = [
     "fastmcp~=4.1",
     "keyring>=25.7.0",
     "pydantic>=2.9",
-    "pyhive-integration==1.0.10",
+    "pyhive-integration==2.0.0b5",
 ]
 
 [project.scripts]
